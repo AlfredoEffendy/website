@@ -57,7 +57,9 @@ button becomes "Home" (its href logic already resolves the project sub-path).
 ## Home page (`tools/pages/home.mjs`, path `index.html`)
 
 Top to bottom:
-1. **Hero.** `<h1>` Alfredo Effendy; "Ph.D. candidate in Economics, University of Washington · expected 2027"; fields
+1. **Hero.** The author's headshot beside the text on wide screens and above it on phones: square crop, about
+   176 px, the site's corner radius and a hairline border, `alt="Alfredo Effendy"`, explicit width/height, eager load.
+   `<h1>` Alfredo Effendy; "Ph.D. candidate in Economics, University of Washington · expected 2027"; fields
    line (the three C.V. fields); "On the 2026–2027 academic job market". Actions: Download C.V. (PDF), Job market
    paper (PDF), email (mailto), UW Economics profile (external).
 2. **Job market paper card.** Title; the one-sentence summary; three key numbers (signal on in 93 of 458 months;
@@ -70,7 +72,12 @@ Top to bottom:
 5. **Tools.** A Stats Engine card (logo, one line, "Open Stats Engine"). The Markets card is added in project 2.
 
 No About Me paragraph on the home page (the hero says the same thing); Research, Teaching and C.V. keep theirs.
-Style group `src/styles/home.css`; entry `src/site.ts` (no page script). Facts only from `notes/source/cv.md` and the
+Style group `src/styles/home.css`; entry `src/site.ts` (no page script).
+
+Headshot files: the author's photo (supplied 2026-10-01, 500×449 JPEG) is kept as `notes/source/headshot.jpg`;
+`tools/make-headshot.py` (Pillow) crops it square and writes `static/img/alfredo-effendy-200.webp` and `-400.webp`
+(`srcset` 1x/2x), each well under the 160 KB image budget. A larger original can replace the source later; rerun the
+script. Facts only from `notes/source/cv.md` and the
 paper, as for every page.
 
 ## Other changes
