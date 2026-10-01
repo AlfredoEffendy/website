@@ -1,5 +1,5 @@
 // C.V. (cv/index.html): the academic C.V. as a web page, with the PDF to download.
-// Every fact comes from notes/source/cv.md (transcribed from the August 2026 PDF). Kept off the page
+// Every fact comes from notes/source/cv.md (transcribed from the September 2026 PDF). Kept off the page
 // on purpose: the phone number and the referees' email addresses (both are in the PDF).
 import { statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -7,7 +7,7 @@ import { EMAIL, ROOT, ROUTES, SITE } from '../shell.mjs';
 
 const CV_PDF = 'files/alfredo-effendy-cv.pdf';
 const JMP_PDF = 'files/when-yield-curves-invert-together.pdf';
-const CV_DATE = 'August 2026';
+const CV_DATE = 'September 2026';
 
 // ---- the record, from notes/source/cv.md -------------------------------------------------------
 const UW = 'University of Washington';
@@ -19,7 +19,7 @@ const INTERESTS = ['International Finance', 'Asset Pricing, Risk Management', 'B
 const ADDRESS = 'Department of Economics, University of Washington, 319C Savery Hall, Chelan Ln, Seattle, WA 98195';
 
 const EDUCATION = [
-  { year: '2027', expected: true, degree: 'Ph.D., Economics', school: UW, fields: 'International Finance, Macroeconomics, Asset Pricing' },
+  { year: '2027', expected: true, degree: 'Ph.D., Economics', school: UW, fields: 'International Finance, Asset Pricing, Macro-Finance' },
   { year: '2023', degree: 'M.A., Economics', school: UW },
   { year: '2020', degree: 'M.S., Statistics', school: ND },
   { year: '2018', degree: 'B.S., Mathematics', school: UCI, note: 'Honors in Mathematics, Concentration in Mathematical Finance' },
@@ -29,7 +29,7 @@ const EDUCATION = [
 
 const JMP = {
   title: 'When Yield Curves Invert Together: Currency Crash Risk',
-  // The C.V. abstract, verbatim.
+  // The August 2026 C.V.'s abstract, verbatim (the September C.V. gives the title only).
   abstract:
     'A currency is exposed to risk specific to its own country and to risk that is global. A single country’s yield curve inversion ' +
     'can reflect either kind, but when multiple countries’ curves invert at the same time, the more likely cause is a global shock. ' +
@@ -40,11 +40,19 @@ const JMP = {
     'low-rate currencies used to fund the trade.',
 };
 
-const IN_PROGRESS = ['Maintaining Carry Structure in Machine Learning Carry Trade'];
+/** Title and the C.V.'s description, verbatim. */
+export const IN_PROGRESS = [
+  ['Maintaining Carry Structure in Machine Learning Carry Trade',
+    'Many machine learning carry trade papers focus on returns predictability and at times forgo the carry trade structure. ' +
+    'This paper is utilizing time series machine learning methods such as GRU, LSTM and their ensemble to predict carry trade crashes while maintaining the carry structure.'],
+  ['Cross-Asset Inversion Clocks',
+    'This paper analyzes the individual and clusters of yield curve inversions and their impact on different asset markets, such as the equity, commodity, and credit market. ' +
+    'It further asks whether the age of the inversions have different effects across multiple assets.'],
+];
 
 /** Instructor of record, in the C.V.'s order; each has a page under teaching/. */
 const SOLO = [
-  { years: '2026–', slug: 'bbus-221', code: 'B BUS 221', title: 'Introduction Macroeconomics', unit: 'School of Business, University of Washington Bothell' },
+  { years: '2026', slug: 'bbus-221', code: 'B BUS 221', title: 'Introduction Macroeconomics', unit: 'School of Business, University of Washington Bothell' },
   { years: '2025', slug: 'qmeth-201', code: 'QMETH 201', title: 'Introduction to Statistical Methods', unit: `Foster School of Business, ${UW}` },
   { years: '2025', slug: 'econ-301', code: 'ECON 301', title: 'Intermediate Macroeconomics', unit: `Department of Economics, ${UW}` },
   { years: '2024', slug: 'econ-200', code: 'ECON 200', title: 'Introduction to Microeconomics', unit: `Department of Economics, ${UW}` },
@@ -59,7 +67,7 @@ const TA = [
   ] },
   { unit: 'Department of Statistics', place: UW, rows: [['2022–2024', 'STAT 311', 'Elements of Statistical Methods']] },
   { unit: 'Department of Economics', place: UW, rows: [
-    ['2022–2023', 'ECON 201', 'Introduction to Statistical Methods'],
+    ['2022–2023', 'ECON 201', 'Introduction to Macroeconomics'],
     ['2022', 'ECON 345', 'Global Health Economics'],
   ] },
   { unit: ACMS, place: ND, rows: [
@@ -76,7 +84,11 @@ const AWARDS = [
   ['2021', 'George and Pearl Corkery Scholarship'],
   ['2018', 'Order of Merit Awards'],
 ];
-const SERVICE = [['2022–', 'Graduate Student Committee President']];
+const SERVICE = [
+  ['2024–2026', 'Macroeconomics and International Trade Seminar and Brownbag Organizer'],
+  ['2022–2024', '<b>President</b>, Graduate Student Committee, Department of Economics'],
+  ['2023', 'Graduate Student Referee for Assistant Teaching Professor Search Committee'],
+];
 const EMPLOYMENT = [['2021', 'Panin Asset Management', 'Machine Learning Engineer – Market Forecasting']];
 
 /** Names, titles and affiliations only: no email addresses on the web page. */
@@ -175,7 +187,11 @@ const paper = (root) =>
   );
 
 const progress = () =>
-  section('work-in-progress', 'Work in progress', `<ul class="cv-plain">${IN_PROGRESS.map((t) => `<li>${t}</li>`).join('')}</ul>`);
+  section(
+    'work-in-progress',
+    'Work in progress',
+    `<ul class="cv-plain">${IN_PROGRESS.map(([t, d]) => `<li><p>${t}</p><p class="cv-sub">${d}</p></li>`).join('')}</ul>`,
+  );
 
 function teaching(root) {
   const solo = SOLO.map((c) =>

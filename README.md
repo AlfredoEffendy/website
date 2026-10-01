@@ -96,4 +96,4 @@ Generated files are git-ignored: `index.html`, `research/`, `teaching/`, `cv/`, 
 
 - Phone layouts were checked in desktop browsers at phone widths, not on handsets.
 - Under Lighthouse's throttled-phone profile, the workspace's first layout pass is slow, which pushes total blocking time up. Unthrottled, first paint is about 0.25 s.
-- Course pages show quarters ("Summer 2024", "Winter 2025", "Summer 2025"). They come from public UW time-schedule and section pages, cited in each module's `whenSource`. The C.V. lists years only, so confirm the quarters with the author.
+- Course pages show quarters. ECON 200, ECON 301 and QMETH 201 ("Summer 2024", "Winter 2025", "Summer 2025") come from public UW time-schedule and section pages, cited in each module's `whenSource`. The C.V. lists years only, so confirm those quarters with the author. B BUS 221 ("Winter and Spring 2026") was confirmed by the author.

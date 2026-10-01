@@ -74,8 +74,8 @@ export const course = {
   title: 'Introduction to Macroeconomics',
   unit: 'School of Business, University of Washington Bothell',
   role: 'Instructor',
-  when: '2026–',
-  whenSource: null, // no public UW page names the quarter
+  when: 'Winter and Spring 2026', // quarters confirmed by the author (2026-10-01); the C.V. gives 2026
+  whenSource: null, // no public UW page names the quarters
   catalog: {
     text: 'Analysis of the aggregate economy: national income, inflation, business fluctuations, unemployment, monetary system, federal budget, international trade and finance.',
     url: CATALOG,

@@ -26,6 +26,7 @@ export const course = {
   unit: 'Department of Economics, University of Washington',
   role: 'Instructor',                                // solo instructor of record
   when: '2024',                                      // exactly as the C.V. gives it; may add a cited quarter (e.g. 'Summer 2024')
+                                                     // or one the author confirmed (recorded in notes/source/cv.md)
   whenSource: 'https://…',                           // URL supporting a quarter, or null
   catalog: { text: '…', url: '…' },                  // official catalogue description, verbatim or closely paraphrased, with its URL
   summary: '…',                                      // ≤ 40 words: what students leave able to do

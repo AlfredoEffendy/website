@@ -4,16 +4,16 @@
 // inspect/walkthrough viewer (src/ui/viewer.ts, loaded on first use), accessible tables, and one
 // small illustration of the signal's rule (src/pages/research.ts).
 // Every statement comes from the job market paper (notes/source/jmp.txt) via the article brief; the
-// C.V. (notes/source/cv.md) supplies the work-in-progress title. Page references are PDF pages.
+// C.V. (notes/source/cv.md, via cv.mjs) supplies the work-in-progress titles and descriptions. Page references are PDF pages.
 // Figures are cut from the PDF by tools/extract-figures.py into static/research/jmp/.
 import { readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { AUTHOR, ROOT, ROUTES } from '../shell.mjs';
+import { IN_PROGRESS } from './cv.mjs';
 
 const PDF = 'files/when-yield-curves-invert-together.pdf';
 const FIG_DIR = 'research/jmp/';
 const INTERESTS = ['International Finance', 'Asset Pricing, Risk Management', 'Big Data Analysis'];
-const WIP = ['Maintaining Carry Structure in Machine Learning Carry Trade'];
 
 // ---- the paper -------------------------------------------------------------------------------------
 const META = {
@@ -575,7 +575,7 @@ function indexBody(root) {
 </article>
 <section class="r-wip" aria-labelledby="wip-h">
 <h2 class="r-h2" id="wip-h">Work in progress</h2>
-<ul>${WIP.map((t) => `<li>${t}</li>`).join('')}</ul>
+<ul>${IN_PROGRESS.map(([t, d]) => `<li><h3>${t}</h3><p>${d}</p></li>`).join('')}</ul>
 </section>
 </div>
 </main>`;

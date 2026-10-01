@@ -26,7 +26,7 @@ const unitLine = (key) => `${UNITS[key].name}, ${UNITS[key].place}`;
 
 /** Instructor of record, in the C.V.'s order (most recent first). Course modules add the detail. */
 const SOLO = [
-  { slug: 'bbus-221', code: 'B BUS 221', title: 'Introduction Macroeconomics', unitKey: 'bothell', when: '2026–' },
+  { slug: 'bbus-221', code: 'B BUS 221', title: 'Introduction Macroeconomics', unitKey: 'bothell', when: '2026' },
   { slug: 'qmeth-201', code: 'QMETH 201', title: 'Introduction to Statistical Methods', unitKey: 'foster', when: '2025' },
   { slug: 'econ-301', code: 'ECON 301', title: 'Intermediate Macroeconomics', unitKey: 'econ', when: '2025' },
   { slug: 'econ-200', code: 'ECON 200', title: 'Introduction to Microeconomics', unitKey: 'econ', when: '2024' },
@@ -38,8 +38,6 @@ const ND = (code) => `https://catalog.nd.edu/search/?P=ACMS%20${code}`;
 /**
  * Teaching assistant, in the C.V.'s order. `desc` is a one-line, close paraphrase of the official
  * catalogue entry at `src`; a course whose entry could not be matched to the C.V. has none.
- * ECON 201: the C.V. titles it "Introduction to Statistical Methods" but the UW catalogue's ECON 201
- * is Introduction to Macroeconomics, so no description is shown.
  */
 const TA = [
   { years: '2026–', code: 'SCM 501', title: 'Probability and Statistics', unitKey: 'foster',
@@ -54,7 +52,9 @@ const TA = [
   { years: '2022–2024', code: 'STAT 311', title: 'Elements of Statistical Methods', unitKey: 'stat',
     desc: 'Study design, descriptive statistics, correlation and regression, probability and sampling, estimation and confidence intervals, t-tests and chi-square tests.',
     src: UW('stat', 311), from: 'UW course catalogue' },
-  { years: '2022–2023', code: 'ECON 201', title: 'Introduction to Statistical Methods', unitKey: 'econ' },
+  { years: '2022–2023', code: 'ECON 201', title: 'Introduction to Macroeconomics', unitKey: 'econ',
+    desc: 'The aggregate economy: national income, inflation, business fluctuations, unemployment, the monetary system, the federal budget, and international trade and finance.',
+    src: UW('econ', 201), from: 'UW course catalogue' },
   { years: '2022', code: 'ECON 345', title: 'Global Health Economics', unitKey: 'econ',
     desc: 'Health economics and the tools economists use to inform global health solutions in low- and middle-income countries.',
     src: UW('econ', 345), from: 'UW course catalogue' },

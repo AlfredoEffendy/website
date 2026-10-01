@@ -57,4 +57,7 @@
 
 /* ---- work in progress --------------------------------------------------------------------------------- */
 .r-wip { display: grid; gap: var(--s-3); }
-.r-wip li { padding: var(--s-3) var(--s-4); background: var(--surface); border: 1px dashed var(--line-strong); border-radius: var(--radius); font: 600 1.125rem/1.35 var(--font-display); }
+.r-wip ul { display: grid; gap: var(--s-3); }
+.r-wip li { display: grid; gap: var(--s-1); padding: var(--s-3) var(--s-4); background: var(--surface); border: 1px dashed var(--line-strong); border-radius: var(--radius); font: 600 1.125rem/1.35 var(--font-display); }
+.r-wip h3 { font: inherit; }
+.r-wip li p { max-width: 74ch; font: 400 0.9375rem/1.55 var(--font-body); color: var(--muted); text-wrap: pretty; }
