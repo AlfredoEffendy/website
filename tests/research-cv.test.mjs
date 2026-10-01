@@ -70,7 +70,8 @@ describe('C.V. page', () => {
     expect(words).not.toContain('Read the summary');
     expect(html).not.toContain('when-yield-curves-invert-together/');
     expect(words).not.toMatch(PHONE);
-    expect(new Set(html.match(/[a-z0-9.]+@uw\.edu/g))).toEqual(new Set(['aeffendy@uw.edu']));
+    // Contact details live on the home page and in the PDF; the C.V. page shows no address or email at all.
+    expect(html).not.toMatch(/@uw\.edu|Savery Hall|cv-addr/);
   });
 
   it('drops the decorative pieces', () => {

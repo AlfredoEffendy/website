@@ -1,5 +1,4 @@
 /* C.V.: plain rows, a year column then the entry; the references in two columns on wide screens. */
-.cv-addr { margin-top: var(--s-2); color: var(--muted); font-size: 0.875rem; }
 .cv-rows { display: grid; gap: var(--s-2); }
 .cv-rows li { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: var(--s-4); }
 .cv-yr { color: var(--muted); font-variant-numeric: tabular-nums; }

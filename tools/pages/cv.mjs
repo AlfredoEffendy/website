@@ -3,7 +3,7 @@
 // and teaching have their own pages. Every fact comes from notes/source/cv.md (transcribed from the
 // September 2026 PDF). Kept off the page on purpose: the phone number and the referees' email addresses
 // (both are in the PDF).
-import { EMAIL, ROUTES } from '../shell.mjs';
+import { ROUTES } from '../shell.mjs';
 
 const CV_PDF = 'files/alfredo-effendy-cv.pdf';
 
@@ -11,7 +11,6 @@ const CV_PDF = 'files/alfredo-effendy-cv.pdf';
 const UW = 'University of Washington';
 const UCI = 'University of California, Irvine';
 const ND = 'University of Notre Dame';
-const ADDRESS = 'Department of Economics, University of Washington, 319C Savery Hall, Chelan Ln, Seattle, WA 98195';
 
 const EDUCATION = [
   ['2027 (expected)', `Ph.D., Economics, ${UW}`, 'Fields: International Finance, Asset Pricing, Macro-Finance'],
@@ -51,7 +50,6 @@ function body(root) {
 <h1>C.V.</h1>
 <p><a href="${root}${CV_PDF}" type="application/pdf">C.V. (PDF)</a></p>
 <p>Research and teaching: see the <a href="${root}${ROUTES.research}">Research</a> and <a href="${root}${ROUTES.teaching}">Teaching</a> pages.</p>
-<p class="cv-addr">${ADDRESS} · <a href="mailto:${EMAIL}">${EMAIL}</a></p>
 <h2>Education</h2>
 ${rows(EDUCATION)}
 <h2>Fellowships and Awards</h2>
