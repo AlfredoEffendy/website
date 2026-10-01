@@ -15,7 +15,6 @@ const body = (root) => `<main id="main" class="page home">
 <p>I am an Economics Ph.D. candidate at the University of Washington.</p>
 <p>My research interests are in International Finance, Asset Pricing, Risk Management, and Big Data Analysis.</p>
 <p class="h-market">I am on the 2026–2027 academic job market.</p>
-<p>My <a href="${root}${ROUTES.teaching}">Teaching page</a> has the interactive illustrations I built for my courses, and <a href="${root}${ROUTES.labs}">Stats Engine</a>, a statistics tool for teaching.</p>
 <p><a href="${root}${CV_PDF}" type="application/pdf">C.V. (PDF)</a> · <a href="${root}${JMP_PDF}" type="application/pdf">Job market paper (PDF)</a></p>
 <h2>Contact</h2>
 <address>Department of Economics<br>University of Washington<br>319C Savery Hall, Seattle, WA 98195<br><a href="mailto:${EMAIL}">${EMAIL}</a></address>

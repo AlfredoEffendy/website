@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ROUTES, THEME_BOOT, footer, labHref, topbar } from '../tools/shell.mjs';
+import { ROUTES, THEME_BOOT, labHref, topbar } from '../tools/shell.mjs';
 
 /** Runs the boot script with a given address, system setting and saved choice; returns data-theme. */
 function bootTheme({ search = '', systemDark = false, saved = null }) {
@@ -62,9 +62,7 @@ describe('topbar', () => {
 });
 
 describe('footer', () => {
-  it('is one plain line with no menu', () => {
-    const html = footer('../');
-    expect(html).toContain('Department of Economics, University of Washington');
-    expect(html).not.toContain('<nav');
+  it('is gone: shell.mjs no longer offers one', async () => {
+    expect(Object.keys(await import('../tools/shell.mjs'))).not.toContain('footer');
   });
 });

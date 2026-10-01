@@ -223,9 +223,6 @@ td.empty { color: var(--muted); }
 .slot:not(.filled) { font: italic 400 1em var(--font-math); color: var(--muted); border-color: transparent; }
 .eq-note { font: 400 0.8125rem/1.5 var(--font-body); color: var(--muted); border-top: 1px solid var(--line); padding-top: var(--s-2); }
 .eq-note b { color: var(--ink); font-variant-numeric: tabular-nums; }
-.site-footer { border-top: 1px solid var(--line); padding: var(--s-4); color: var(--muted); font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-6); justify-content: space-between; background: var(--surface); }
-.site-footer a { text-decoration: underline; text-underline-offset: 3px; }
-.site-footer a:hover { color: var(--accent); }
 @media (max-width: 52rem) {
   .figure { padding-inline: var(--s-2); }
   input[type="number"], input[type="text"], select, .btn, .seg { height: 2.75rem; }

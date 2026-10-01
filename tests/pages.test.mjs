@@ -9,4 +9,8 @@ describe('page chrome', () => {
     expect(existsSync(at('tools/about.mjs'))).toBe(false);
     expect(existsSync(at('src/styles/about.css'))).toBe(false);
   });
+
+  it('has no footer on any page', () => {
+    expect(readFileSync(at('tools/gen-pages.mjs'), 'utf8')).not.toMatch(/footer/);
+  });
 });

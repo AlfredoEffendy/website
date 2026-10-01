@@ -8,7 +8,7 @@ import { copyFileSync, cpSync, existsSync, mkdirSync, readdirSync, readFileSync,
 import { dirname, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { LABS, figure, seedRow } from './labs.mjs';
-import { LOADER, ROOT, THEME_BOOT, css, footer, head, rootOf, topbar } from './shell.mjs';
+import { LOADER, ROOT, THEME_BOOT, css, head, rootOf, topbar } from './shell.mjs';
 
 const DEFAULT = LABS[0].slug;
 
@@ -103,7 +103,6 @@ ${LABS.map(panel).join('\n')}
 ${LABS.map(notes).join('\n')}
 <noscript><p>The simulations need JavaScript.</p></noscript>
 </div>
-${footer()}
 <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
@@ -132,7 +131,6 @@ for (const file of modules) {
 <a class="skip" href="#main">Skip to content</a>
 ${topbar({ root, current: p.current })}
 ${p.body(root)}
-${footer()}
 <script type="module" src="/${p.entry ?? 'src/site.ts'}"></script>
 </body>
 </html>

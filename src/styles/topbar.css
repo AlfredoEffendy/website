@@ -18,9 +18,6 @@
 .s-bar { transform-origin: 6px 12px; transition: transform .2s cubic-bezier(0,0,.2,1) .1s, opacity .1s linear .1s; }
 .s-arm { stroke-dasharray: 1; stroke-dashoffset: .5; transition: stroke-dashoffset .24s cubic-bezier(.2,0,0,1); }
 
-/* Footer: the by-line, then a note on its own line. */
-.foot-note { display: block; }
-
 /* Phone: name (and Σ) on the first row, the links on the second; --bar-h grows to match, so Stats Engine's
    layout, which is sized from it, still fits. */
 @media (max-width: 52rem) {

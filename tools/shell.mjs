@@ -102,9 +102,3 @@ ${sigma}<a class="brand" href="${root}${ROUTES.home}">${AUTHOR}</a>
 ${lab ? '<h1 class="sr">Stats Engine</h1>\n' : ''}<nav class="site-nav" aria-label="Main"><ul>${NAV.map(([key, route, label]) => `<li><a href="${root}${route}"${here(key)}>${label}</a></li>`).join('')}</ul></nav>
 </header>`;
 }
-
-export function footer() {
-  return `<footer class="site-footer">
-<p>${AUTHOR} · Department of Economics, University of Washington<span class="foot-note">Independent site; not an official University site.</span></p>
-</footer>`;
-}

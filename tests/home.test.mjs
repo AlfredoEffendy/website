@@ -38,9 +38,8 @@ describe('home page', () => {
     expect(words).toContain('I am an Economics Ph.D. candidate at the University of Washington.');
     expect(words).toContain('My research interests are in International Finance, Asset Pricing, Risk Management, and Big Data Analysis.');
     expect(words).toContain('I am on the 2026–2027 academic job market.');
-    expect(words).toContain('My Teaching page has the interactive illustrations I built for my courses, and Stats Engine, a statistics tool for teaching.');
-    expect(html).toContain('<a href="./teaching/">Teaching page</a>');
-    expect(html).toContain('<a href="./stats-engine/">Stats Engine</a>');
+    // The menu already links Teaching and Stats Engine; the home page does not repeat them.
+    expect(words).not.toMatch(/Teaching page|Stats Engine/);
   });
 
   it('links the C.V. and the paper, and gives the contact details', async () => {
