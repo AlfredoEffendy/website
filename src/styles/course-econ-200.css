@@ -1,0 +1,50 @@
+/* ECON 200 interactive (taxes and price controls). Builds on the kit's .c-split/.c-panel/.c-out and base.css.
+   Wide: controls on the left, chart, read-outs and equations on the right.
+   Below 60rem: the chart first, the controls under it, then read-outs and equations. */
+.e200 { --e200-h: clamp(18rem, 10vw + 12rem, 25rem); }
+.e200 .plot { --h: var(--e200-h); }
+.e200 legend { padding: 0; margin-bottom: 3px; }
+.e200-grp { display: grid; gap: var(--s-3); }
+.e200-range { gap: 0; }
+.e200-range .rangeline { gap: var(--s-2); }
+.e200-range .rangeline output { width: 3.3em; font-size: 1rem; }
+.e200-actions { display: flex; justify-content: flex-end; margin-top: calc(-1 * var(--s-1)); }
+.e200-ill { font-size: 0.75rem; color: var(--muted); text-wrap: pretty; }
+.e200-ill i { font-size: 1.1em; }
+.e200-badge { color: var(--gold-ink); }
+
+/* Key swatches match the canvas fills. */
+.e200 .key span::before { box-shadow: inset 0 0 0 1px var(--line); }
+.e200 .key .e200-k-cs { --k: color-mix(in oklab, var(--accent) 22%, transparent); }
+.e200 .key .e200-k-ps::before { background: repeating-linear-gradient(135deg, color-mix(in oklab, var(--accent) 50%, transparent) 0 1.3px, transparent 1.3px 4px), color-mix(in oklab, var(--accent) 7%, transparent); }
+.e200 .key .e200-k-rev { --k: color-mix(in oklab, var(--ink) 11%, transparent); }
+.e200 .key .e200-k-dwl { --k: color-mix(in oklab, var(--bad) 36%, transparent); }
+.e200 .key .k-line::before { box-shadow: none; }
+
+.e200-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.e200-stats .stat b { font-size: 1.25rem; }
+.e200-stats .stat.loss b { color: var(--bad); }
+.e200-stats .stat.loss small, .e200-stats .stat.e200-x small { color: var(--muted); }
+.e200 .eq sub { font-family: var(--font-body); font-style: normal; }
+
+@media (min-width: 60rem) {
+  .e200-panel { position: sticky; top: var(--s-4); }
+}
+@media (max-width: 59.99rem) {
+  .e200 > .c-out { display: contents; }
+  .e200-fig { order: -2; }
+  .e200-panel { order: -1; }
+}
+/* Tablet: two columns of controls. */
+@media (min-width: 36rem) and (max-width: 59.99rem) {
+  .e200-panel { grid-template-columns: 1fr 1fr; gap: var(--s-3) var(--s-6); align-items: start; }
+  .e200-panel > .field.wide { grid-column: auto; }
+  .e200-panel > .e200-actions, .e200-panel > .e200-ill { grid-column: 1 / -1; }
+}
+/* Phone: a squarer chart, two columns of read-outs, smaller equations. */
+@media (max-width: 35.99rem) {
+  .e200 { --e200-h: min(84vw, 20rem); }
+  .e200-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .e200-stats .stat { padding: var(--s-2) var(--s-3); }
+  .e200 .eq { font-size: 1.0625rem; }
+}

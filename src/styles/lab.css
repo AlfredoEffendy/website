@@ -1,0 +1,162 @@
+/* Workspace: tab rail | inputs | output */
+.app { display: grid; grid-template-columns: 12.5rem minmax(0, 1fr); min-height: calc(100svh - var(--bar-h) - 3px); border-bottom: 1px solid var(--line); }
+.tabs { display: flex; flex-direction: column; gap: 2px; padding: var(--s-3) var(--s-2); background: var(--surface); border-right: 1px solid var(--line); }
+.tab { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); align-items: center; gap: var(--s-3); padding: 0.625rem var(--s-3); border: 0; border-radius: var(--radius); background: none; text-align: left; font-size: 0.8125rem; line-height: 1.25; color: var(--muted); }
+.tab svg { width: 1.25rem; height: 1.25rem; }
+.tab small { display: block; font: 600 0.625rem var(--font-display); letter-spacing: 0.12em; color: var(--gold-ink); }
+.tab:hover { background: var(--accent-soft); color: var(--ink); }
+/* The heavier tab sits apart from the simulations. */
+.tab.heavy { margin-top: var(--s-3); position: relative; }
+.tab.heavy::before { content: ""; position: absolute; inset: calc(-1 * var(--s-2)) var(--s-2) auto; border-top: 1px solid var(--line); }
+.panel { display: none; grid-template-columns: 18rem minmax(0, 1fr); min-width: 0; view-transition-name: panel; }
+.notes { display: none; }
+/*TABS*/
+.inputs { display: flex; flex-direction: column; gap: var(--s-4); padding: var(--s-4); background: var(--surface); border-right: 1px solid var(--line); }
+.inputs h2 { font-size: 1.25rem; line-height: 1.15; letter-spacing: -0.005em; }
+.inputs .ask { color: var(--muted); font-size: 0.8125rem; margin-top: var(--s-1); }
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2); }
+.actions .wide { grid-column: 1 / -1; }
+.toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--s-2); }
+details.opts { font-size: 0.8125rem; color: var(--muted); }
+details.opts summary { cursor: pointer; width: max-content; }
+details.opts .fields { margin-top: var(--s-2); }
+.seedrow { margin-top: auto; padding-top: var(--s-3); border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: var(--s-2); align-items: end; }
+.seedrow input { font-family: var(--font-mono); font-size: 0.8125rem; }
+/* Output column: faint architectural grid on the page, graph paper on the chart */
+.output { display: flex; flex-direction: column; gap: var(--s-4); padding: var(--s-4) var(--s-6) var(--s-6); min-width: 0;
+  background: linear-gradient(var(--grid-minor) 1px, transparent 1px) 0 -1px / 100% 40px, linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px) -1px 0 / 40px 100%; }
+.status { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s-2) var(--s-3); font-size: 0.8125rem; color: var(--muted); min-height: 1.75rem; padding-left: 1.5rem; }
+.status b { color: var(--ink); }
+.status .plot { flex: 1 1 12rem; }
+/* Data drawer: the rows behind the chart */
+.data { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.data summary { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); cursor: pointer; list-style: none; }
+.data summary::-webkit-details-marker { display: none; }
+.data summary::before { content: ""; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg); transition: transform 0.2s; }
+.data[open] summary::before { transform: rotate(45deg); }
+.data summary:hover { background: var(--accent-soft); }
+.data-hint { font-size: 0.8125rem; color: var(--muted); }
+.data-body { border-top: 1px solid var(--line); min-height: 6rem; animation: field-in 0.26s cubic-bezier(.2,.7,.2,1) both; }
+/* Draggable probability markers */
+.handle { position: absolute; top: 0; bottom: 0; width: 2.75rem; margin-left: -1.375rem; cursor: ew-resize; touch-action: pan-y pinch-zoom; display: grid; justify-items: center; align-content: end; background: none; border: 0; padding: 0 0 2px; }
+.handle span { font: 600 0.75rem/1.7 var(--font-body); background: var(--accent); color: var(--on-accent); padding: 0 0.5em; border-radius: 3px; font-variant-numeric: tabular-nums; transition: transform 0.12s; }
+.handle:hover span, .handle:focus-visible span, .handle.drag span { transform: scale(1.12); background: var(--accent-strong); }
+.handle:focus-visible { outline: 0; }
+.handle:focus-visible span { box-shadow: 0 0 0 3px var(--accent-soft); }
+/* Notes below the workspace */
+.below { width: min(78rem, 100% - 2rem); margin-inline: auto; padding-block: var(--s-8) var(--s-12); view-transition-name: notes; }
+.notes { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--s-6) var(--s-8); }
+.notes h3 { font: 600 0.6875rem var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-ink); margin-bottom: var(--s-2); padding-bottom: var(--s-2); border-bottom: 1px solid var(--line); }
+.notes p, .notes li, .notes dd { color: var(--muted); font-size: 0.875rem; }
+.notes b { color: var(--ink); }
+.notes ol { counter-reset: s; display: grid; gap: var(--s-2); }
+.notes li { counter-increment: s; display: grid; grid-template-columns: 1.5rem 1fr; }
+.notes li::before { content: counter(s); font: 600 0.8125rem/1.7 var(--font-display); color: var(--gold-ink); }
+.notes dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--s-1) var(--s-3); }
+.notes dt { font: italic 1rem/1.4 var(--font-math); color: var(--accent); }
+.notes .fine { grid-column: 1 / -1; padding-top: var(--s-3); border-top: 1px solid var(--line); font-size: 0.75rem; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
+/* Tab change: the old workspace lifts away, the new one settles in. */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+::view-transition-old(panel), ::view-transition-old(notes) { animation: vt-out 0.14s ease-in both; }
+::view-transition-new(panel), ::view-transition-new(notes) { animation: vt-in 0.28s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(10px); } }
+@media (max-width: 52rem) {
+  .app { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .tabs { flex-direction: row; overflow-x: auto; scrollbar-width: none; border-right: 0; border-bottom: 1px solid var(--line); padding: var(--s-2); }
+  .tab { grid-template-columns: 1.25rem auto; justify-items: start; padding: var(--s-2) var(--s-3); flex: none; min-height: 2.75rem; }
+  .tab > span { display: block; white-space: nowrap; }
+  .tab small { display: none; }
+  .panel { grid-template-columns: minmax(0, 1fr); }
+  .inputs { border-right: 0; border-bottom: 1px solid var(--line); }
+  .output { padding: var(--s-3); }
+}
+/* Wide screens: the button folds the rail down to icons and back. The column snaps; only the labels fade. */
+@media (min-width: 52.0625rem) {
+  .js[data-rail="mini"] .app { grid-template-columns: 4rem minmax(0, 1fr); }
+  .js[data-rail="mini"] .tab { grid-template-columns: 1fr; justify-items: center; padding-inline: 0; }
+  .js[data-rail="mini"] .tab > span { display: none; }
+  .js .tab > span { animation: field-in .2s cubic-bezier(0,0,.2,1) both; }
+}
+@media (max-width: 52rem) {
+  .js .tabs { position: absolute; z-index: 20; top: calc(var(--bar-h) + 3px); left: 0; right: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-1); padding: var(--s-2); overflow: visible;
+    border-bottom: 1px solid var(--line-strong); box-shadow: 0 16px 24px -16px var(--pop);
+    visibility: hidden; opacity: 0; transform: translateY(-.5rem);
+    transition: opacity .14s linear, transform .14s cubic-bezier(.4,0,1,1), visibility 0s .14s; }
+  .js:has(.nav-toggle[aria-expanded="true"]) .tabs { visibility: visible; opacity: 1; transform: none;
+    transition: opacity .2s linear, transform .24s cubic-bezier(0,0,.2,1); }
+  .js .tab { min-height: 3rem; }
+  .js .tab > span { white-space: normal; }
+  .js .tab small { display: block; }
+  .js .tab.heavy { margin-top: 0; }
+  .js .tab.heavy::before { content: none; }
+}
+/* Loading mark: bars rise (the simulation), then the bell draws over them (the theory).
+   It sits in the empty chart frame and only appears if loading takes long enough to notice. */
+.loader { position: absolute; inset: 0; margin: auto; width: 3.5rem; height: 3.5rem; fill: none; stroke-width: 2.4; stroke-linecap: round; opacity: 0; animation: ld-in .2s linear .28s forwards; }
+.ready .loader { display: none; }
+.loader g path { stroke: var(--bar); transform-origin: 0 26px; animation: ld-bar 1.5s cubic-bezier(.2,0,0,1) calc(var(--i) * 70ms) infinite both; }
+.loader .bell { stroke: var(--gold); stroke-dasharray: 1 2; animation: ld-bell 1.5s cubic-bezier(.4,0,.2,1) infinite both; }
+@keyframes ld-in { to { opacity: 1; } }
+@keyframes ld-bar { 0% { transform: scaleY(0); } 30%, 86% { transform: none; opacity: 1; } 100% { opacity: 0; } }
+@keyframes ld-bell { 0%, 28% { stroke-dashoffset: 1; } 68%, 86% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+/* Phone: the chart stays pinned in view and the controls sit in a dock at the bottom of the screen. */
+.dock-more { display: none; }
+@media (max-width: 52rem) {
+  .js { --dock-h: calc(8.75rem + env(safe-area-inset-bottom, 0px)); scroll-padding-bottom: var(--dock-h); }
+  .js .output { order: 1; }
+  .js .inputs { order: 2; position: sticky; bottom: 0; z-index: 5; gap: var(--s-2);
+    padding: var(--s-2) max(var(--s-3), env(safe-area-inset-right, 0px)) calc(var(--s-2) + env(safe-area-inset-bottom, 0px)) max(var(--s-3), env(safe-area-inset-left, 0px));
+    border-bottom: 0; border-top: 1px solid var(--line-strong); box-shadow: 0 -10px 20px -16px var(--pop); }
+  /* 1rem inputs stop iOS zooming the page on focus. */
+.js .inputs :is(input, select, textarea) { font-size: 1rem; }
+  .js .dock-more { display: block; width: 2.75rem; padding: 0; font-size: 1.25rem; }
+  .js .dock-more[aria-expanded="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  /* Strip: one row of numbers, one row of actions. */
+.js .inputs:not([data-sheet]) { display: grid; grid-template-columns: minmax(0, 1fr) 2.75rem; }
+  .js .inputs:not([data-sheet]) > :not(.fields, .actions, .dock-more) { display: none; }
+  .js .inputs:not([data-sheet]) > div:first-child { display: block; position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .js .inputs:not([data-sheet]) > .fields { grid-column: 1 / -1; display: flex; align-items: end; gap: var(--s-2);
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none;
+    margin-inline: calc(-1 * var(--s-3)); padding-inline: var(--s-3); scroll-padding-inline: var(--s-3); }
+  .js .inputs:not([data-sheet]) > .fields::before, .js .inputs:not([data-sheet]) > .fields::after { content: ""; }
+  .js .inputs:not([data-sheet]) > .fields::before { margin-left: auto; }
+  .js .inputs:not([data-sheet]) > .fields::after { margin-right: auto; }
+  .js .inputs:not([data-sheet]) > .fields :is(.field, .seg-set, .rangeline) { flex: 0 0 5.5rem; scroll-snap-align: start; }
+  .js .inputs:not([data-sheet]) > .fields :is(.seg-set, .rangeline, .field:has(select, textarea, .rangeline)) { flex-basis: 11rem; }
+  .js .inputs:not([data-sheet]) > .fields textarea { height: 2.75rem; min-height: 0; resize: none; }
+  .js .inputs:not([data-sheet]) > .fields .field > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .js .inputs:not([data-sheet]) > .actions { display: flex; gap: var(--s-2); overflow-x: auto; scrollbar-width: none; }
+  .js .inputs:not([data-sheet]) > .actions .btn { flex: 1 0 auto; }
+  /* Sheet: every setting, scrolling inside, never taller than two thirds of the screen. */
+.js .inputs[data-sheet] { max-height: min(66svh, 34rem); overflow-y: auto; padding-top: var(--s-3); }
+  .js .inputs[data-sheet] > * { animation: field-in .2s cubic-bezier(0,0,.2,1) both; }
+  .js .inputs[data-sheet] > div:first-child { padding-right: 3.25rem; }
+  .js .inputs[data-sheet] > .dock-more { order: -1; align-self: flex-end; position: sticky; top: 0; z-index: 1; margin-bottom: -3.25rem; flex: none; }
+  /* Chart: a steady shape that follows the screen width, never squeezed by the dock or the data. */
+.js .plot { --h: clamp(15rem, 68vw, 24rem); }
+  /* Short viewport (keyboard up, landscape): one-row dock, smaller chart. */
+.js[data-fit="short"] { --dock-h: calc(4.75rem + env(safe-area-inset-bottom, 0px)); }
+  .js[data-fit="short"] .inputs:not([data-sheet]) { grid-template-columns: minmax(0, 1fr) minmax(0, auto) 2.75rem; align-items: end; }
+  .js[data-fit="short"] .inputs:not([data-sheet]) > :is(.fields, .actions, .dock-more) { grid-column: auto; grid-row: 1; }
+  .js[data-fit="short"] .inputs:not([data-sheet]) > .actions { max-width: 42vw; }
+  .js[data-fit="short"] .inputs[data-sheet] { max-height: calc(var(--vvh, 100svh) - 3rem); }
+  /* Pinch-zoomed or tiny: nothing sticks. */
+.js[data-fit="free"] .inputs { position: static; }
+  .js { --data-bar: 3.25rem; }
+}
+
+/* Wordless cue that rows have appeared below the fold: a soft band whose sheen crosses three times. */
+.glow { position: fixed; z-index: 6; inset: auto 0 var(--dock-h, 0px) 0; height: 4rem; overflow: hidden; pointer-events: none;
+  opacity: 0; visibility: hidden; transition: opacity .5s linear, visibility 0s .5s;
+  -webkit-mask: linear-gradient(transparent, #000); mask: linear-gradient(transparent, #000); }
+.glow.on { opacity: 1; visibility: visible; transition: opacity .3s linear; }
+.glow::before, .glow::after { content: ""; position: absolute; }
+.glow::before { inset: 0; background: linear-gradient(transparent, var(--bar)); opacity: .5; }
+.glow::after { inset: 0 -100%; background: linear-gradient(100deg, transparent 38%, var(--accent) 50%, transparent 62%); opacity: .3; transform: translateX(-34%); }
+.glow.on::after { animation: glow-run 1.6s cubic-bezier(.4,0,.2,1) 3 both; }
+@keyframes glow-run { to { transform: translateX(34%); } }
+@media (min-width: 52.0625rem) {
+  .glow { --dock-h: 0px; }
+}

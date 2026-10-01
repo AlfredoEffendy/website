@@ -1,0 +1,54 @@
+/* ECON 301 interactive (Solow model). Builds on the kit's .c-split/.c-panel/.c-out and base.css controls.
+   Wide: controls on the left, the Solow diagram and the transition path side by side when there is room.
+   Below 60rem: the diagram first, the sliders right under it, then the path, read-outs and equations. */
+.e301 { --e301-h: clamp(16rem, 10vw + 10rem, 21rem); }
+.e301 .plot { --h: var(--e301-h); }
+.e301-panel { gap: var(--s-3); }
+.e301-range { gap: 0; }
+.e301-range .rangeline { gap: var(--s-2); }
+.e301-range .rangeline output { width: 3.3em; font-size: 1rem; }
+.e301-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-1); }
+.e301-actions .btn.primary { flex: 1 0 auto; }
+.e301-ill { font-size: 0.75rem; color: var(--muted); }
+.e301-badge { color: var(--gold-ink); }
+.e301-figs { display: grid; gap: var(--s-3); min-width: 0; }
+.e301-fig { min-width: 0; }
+.e301-fig-t .fig-head { gap: var(--s-2); }
+.e301-var { flex: none; }
+.e301-var .seg { height: 2.25rem; }
+.e301-var .seg label { padding: 0 0.8rem; }
+.e301-var i { font-size: 1.125rem; }
+.e301 .key .e301-k-gr::before { height: 0; border-top: 1px dashed var(--ink); opacity: 0.7; }
+.e301-stats .stat b { font-size: 1.25rem; }
+.e301-stats .stat span i, .e301-stats sup { text-transform: none; }
+.e301-stats sup { font-size: 0.7em; line-height: 0; }
+
+/* The closed form: tall brackets around the fraction, the exponent at their shoulder. */
+.e301-p { display: inline-block; font: 300 2.2em/1 var(--font-math); transform: scaleX(0.72); vertical-align: middle; margin: 0 -0.08em; }
+.eq sup.e301-pow { vertical-align: 1.45em; margin-left: 0.05em; }
+
+@media (min-width: 60rem) {
+  .e301-panel { position: sticky; top: var(--s-4); }
+  .e301-out { container-type: inline-size; }
+  @container (min-width: 46rem) {
+    .e301-figs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  }
+}
+@media (max-width: 59.99rem) {
+  .e301 > .c-out, .e301-figs { display: contents; }
+  .e301-fig-k { order: -3; }
+  .e301-panel { order: -2; }
+  .e301-fig-t { order: -1; }
+}
+/* Tablet: two columns of sliders. */
+@media (min-width: 36rem) and (max-width: 59.99rem) {
+  .e301-panel { grid-template-columns: 1fr 1fr; gap: var(--s-3) var(--s-6); }
+  .e301-panel > .e301-range { grid-column: auto; }
+  .e301-panel > .e301-actions, .e301-panel > .e301-ill { grid-column: 1 / -1; }
+  .e301-actions .btn.primary { flex: 0 1 12rem; }
+}
+/* Phone: squarer charts read better than letterboxes. */
+@media (max-width: 35.99rem) {
+  .e301 { --e301-h: min(74vw, 19rem); }
+  .e301-var .seg label { padding: 0 0.65rem; }
+}

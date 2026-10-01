@@ -1,0 +1,29 @@
+/* QMETH 201: the hypothesis-test interactive. Tokens only; both themes.
+   Gold = the null distribution (reference), purple = the true mean and the samples (current state). */
+.q201-panel { gap: var(--s-4); }
+.q201 .rangeline output { width: 3.2em; }
+.q201-unit { font-size: 0.75rem; color: var(--muted); margin-top: -0.35rem; }
+.q201-actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2); }
+.q201-actions .btn.primary { grid-column: 1 / -1; }
+.q201-ill { font-size: 0.75rem; line-height: 1.5; color: var(--muted); border-top: 1px solid var(--line); padding-top: var(--s-3); text-wrap: pretty; }
+.q201 .seg label { padding-inline: var(--s-1); }
+.q201-fig .badge { color: var(--gold-ink); }
+.q201-fig .plot { --h: clamp(16rem, calc(100svh - 26rem), 24rem); }
+
+/* Key swatches that match the chart's fills. */
+.q201 .key .q201-k-x::before { width: 2px; height: 0.75rem; vertical-align: -0.1em; background: var(--accent); }
+.q201 .key .q201-k-p::before, .q201 .key .q201-k-a::before { background: color-mix(in oklch, var(--gold) 55%, transparent); }
+.q201 .key .q201-k-rej::before { background: var(--pop); }
+.q201 .key .q201-k-pow::before { background: color-mix(in oklch, var(--accent) 32%, transparent); }
+.q201 .key .q201-k-b::before { background: repeating-linear-gradient(135deg, var(--accent) 0 1px, transparent 1px 4px); opacity: 0.7; }
+.q201 .key [data-for]:not([hidden]) { animation: field-in 0.26s cubic-bezier(.2,.7,.2,1) both; }
+
+.q201-stats .stat small { min-height: 2.2em; }
+.q201-stats .stat small i { font-size: 1.1em; }
+.q201 .eq-num sub { font-size: 0.68em; }
+
+@media (max-width: 40rem) {
+  .q201-panel { padding: var(--s-3); }
+  .q201-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .q201-stats .stat.hero { grid-column: 1 / -1; }
+}

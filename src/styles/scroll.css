@@ -1,0 +1,9 @@
+/* Scroll marker: replaces the scrollbar. A canvas strip over the left edge draws the bell and takes no
+   room; a narrow grip under the bell drags the page (mouse and pen only, so touch scrolls natively). */
+.js { scrollbar-width: none; }
+.js::-webkit-scrollbar { display: none; }
+.scroll-bell { position: fixed; z-index: 30; left: env(safe-area-inset-left, 0px); top: calc(var(--bar-h) + 3px); width: 48px; pointer-events: none;
+  height: calc(100vh - var(--bar-h) - 3px); height: calc(100dvh - var(--bar-h) - 3px); }
+.scroll-grip { display: none; position: fixed; z-index: 31; left: env(safe-area-inset-left, 0px); top: 0; width: 16px; height: 64px; cursor: grab; touch-action: none; }
+.scroll-grip:active { cursor: grabbing; }
+@media (hover: hover) and (pointer: fine) { .scroll-grip { display: block; } }
