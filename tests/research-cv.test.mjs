@@ -52,7 +52,9 @@ describe('C.V. page', () => {
 
   it('is plain: title, the PDF, then only the sections no other page has', () => {
     expect(html).toContain('<h1>C.V.</h1>');
-    expect(words).toContain('Download C.V. (PDF)');
+    // Same link as on the home page: opens the PDF in the browser, no forced download.
+    expect(html).toContain('<p><a href="../files/alfredo-effendy-cv.pdf" type="application/pdf">C.V. (PDF)</a></p>');
+    expect(html).not.toContain(' download');
     const headings = [...html.matchAll(/<h2[^>]*>([^<]+)<\/h2>/g)].map((m) => m[1]);
     expect(headings).toEqual(['Education', 'Fellowships and Awards', 'Professional Service', 'Non-Academic Employment', 'References']);
   });

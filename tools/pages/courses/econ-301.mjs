@@ -5,13 +5,10 @@
 
 const ID = 'econ-301';
 const CATALOG = 'https://www.washington.edu/students/crscat/econ.html#econ301';
-// UW Economics course page for section C, Winter 2025: names Alfredo Effendy as the instructor.
-const SECTION = 'https://econ.washington.edu/courses/2025/winter/econ/301/c';
-// The author's own syllabus for that section (topics by week; textbook: Mankiw, Macroeconomics, 11th ed.),
-// served by this site.
-const SYL = 'files/syllabi/econ-301-winter-2025.pdf';
-// The textbook's chapter titles (publisher's page).
-const TEXT = 'https://www.macmillanlearning.com/college/us/product/Macroeconomics/p/1319387993';
+// UW Time Schedule, Winter 2025: ECON 301 C lists "Effendy, Alfredo Nicholas" as instructor.
+const SCHEDULE = 'https://www.washington.edu/students/timeschd/WIN2025/econ.html#econ301';
+// Topics come from the author's own Winter 2025 syllabus (files/syllabi/econ-301-winter-2025.pdf, linked in
+// the page header; textbook: Mankiw, Macroeconomics, 11th ed.). Sources listed: catalogue and time schedule.
 
 // ---- markup helpers (every id carries the course prefix) -------------------------------------------
 const v = (sym) => `<i>${sym}</i>`;
@@ -89,7 +86,7 @@ export const course = {
   unit: 'Department of Economics, University of Washington',
   role: 'Instructor',
   when: 'Winter 2025',
-  whenSource: SECTION,
+  whenSource: SCHEDULE,
   catalog: {
     text: 'Analysis of the determinants of the aggregate level of employment, output, prices, and income of an economy. Policy issues and applications with special reference to current monetary and fiscal policy.',
     url: CATALOG,
@@ -110,7 +107,6 @@ export const course = {
     {
       title: 'Long-run growth',
       body: 'Economic growth through capital accumulation, population growth and technological progress (Growth I and II in the syllabus).',
-      source: TEXT,
     },
     {
       title: 'Aggregate demand: IS–LM',
@@ -119,7 +115,6 @@ export const course = {
     {
       title: 'The open economy: Mundell–Fleming',
       body: 'Trade, capital flows and exchange rates; then the Mundell–Fleming model, which shows how the exchange-rate regime changes what fiscal and monetary policy can do.',
-      source: TEXT,
     },
     {
       title: 'The business cycle and aggregate supply',
@@ -136,8 +131,6 @@ export const course = {
   labs: [],
   sources: [
     { label: 'UW course catalogue: ECON 301', url: CATALOG },
-    { label: 'UW Economics: ECON 301 C, Winter 2025', url: SECTION },
-    { label: 'ECON 301 C syllabus, Winter 2025 (Alfredo Effendy)', url: SYL },
-    { label: 'Mankiw, Macroeconomics, 11th edition (the course textbook): contents', url: TEXT },
+    { label: 'UW Time Schedule, Winter 2025: ECON 301 C', url: SCHEDULE },
   ],
 };

@@ -6,8 +6,8 @@ const ID = 'qmeth-201';
 const CATALOG = 'https://www.washington.edu/students/crscat/qmeth.html#qmeth201';
 // UW Time Schedule, Summer 2025: QMETH 201 A lists "Effendy, Alfredo Nicholas" as instructor.
 const SCHEDULE = 'https://www.washington.edu/students/timeschd/SUM2025/qmeth.html#qmeth201';
-// The author's own syllabus for this course (Summer 2025), served by this site: the source of the topics.
-const SYLLABUS = 'files/syllabi/qmeth-201-summer-2025.pdf';
+// Topics come from the author's own Summer 2025 syllabus (files/syllabi/qmeth-201-summer-2025.pdf, linked in
+// the page header); the sources listed are the catalogue and the time schedule only.
 
 // ---- markup helpers (every id carries the course prefix) -------------------------------------------
 const v = (sym) => `<i>${sym}</i>`;
@@ -127,6 +127,5 @@ export const course = {
   sources: [
     { label: 'UW course catalogue: QMETH 201', url: CATALOG },
     { label: 'UW Time Schedule, Summer 2025: QMETH 201 A', url: SCHEDULE },
-    { label: 'QMETH 201 syllabus, Summer 2025 (Alfredo Effendy)', url: SYLLABUS },
   ],
 };

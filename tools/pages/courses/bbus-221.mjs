@@ -4,9 +4,8 @@
 
 const ID = 'bbus-221';
 const CATALOG = 'https://www.washington.edu/students/crscatb/bbus.html#bbus221';
-// The author's own syllabi for this course, served by this site: the source of the topics.
-const SYL_W26 = 'files/syllabi/bbus-221-winter-2026.pdf';
-const SYL_S26 = 'files/syllabi/bbus-221-spring-2026.pdf';
+// Topics come from the author's own 2026 syllabi (files/syllabi/bbus-221-*-2026.pdf, linked in the page
+// header). The Bothell time schedule needs a UW sign-in, so the catalogue is the only listed source.
 
 // ---- markup helpers (every id carries the course prefix) -------------------------------------------
 const v = (sym) => `<i>${sym}</i>`;
@@ -117,7 +116,5 @@ export const course = {
   labs: [],
   sources: [
     { label: 'UW course catalogue (Bothell): B BUS 221', url: CATALOG },
-    { label: 'B BUS 221 syllabus, Winter 2026 (Alfredo Effendy)', url: SYL_W26 },
-    { label: 'B BUS 221 syllabus, Spring 2026 (Alfredo Effendy)', url: SYL_S26 },
   ],
 };

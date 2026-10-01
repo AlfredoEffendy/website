@@ -5,11 +5,10 @@
 
 const ID = 'econ-200';
 const CATALOG = 'https://www.washington.edu/students/crscat/econ.html#econ200';
-// UW Economics course page for section B, Summer 2024: names Alfredo Effendy as the instructor.
-const SECTION = 'https://econ.washington.edu/courses/2024/summer/econ/200/b';
-// The author's own syllabus for that section (objectives; outline by chapter of Karlan and Morduch,
-// Microeconomics, 3e), served by this site: the source of the topics.
-const SYL = 'files/syllabi/econ-200-summer-2024.pdf';
+// UW Time Schedule, Summer 2024: ECON 200 B lists "Effendy, Alfredo Nicholas" as instructor.
+const SCHEDULE = 'https://www.washington.edu/students/timeschd/SUM2024/econ.html#econ200';
+// Topics come from the author's own Summer 2024 syllabus (files/syllabi/econ-200-summer-2024.pdf, linked in
+// the page header; Karlan and Morduch, Microeconomics, 3e). Sources listed: catalogue and time schedule.
 
 // ---- markup helpers (every id carries the course prefix) -------------------------------------------
 const v = (sym) => `<i>${sym}</i>`;
@@ -105,7 +104,7 @@ export const course = {
   unit: 'Department of Economics, University of Washington',
   role: 'Instructor',
   when: 'Summer 2024',
-  whenSource: SECTION,
+  whenSource: SCHEDULE,
   catalog: {
     text: 'Analysis of markets: consumer demand, production, exchange, the price system, resource allocation, government intervention.',
     url: CATALOG,
@@ -149,7 +148,6 @@ export const course = {
   labs: [],
   sources: [
     { label: 'UW course catalogue: ECON 200', url: CATALOG },
-    { label: 'UW Economics: ECON 200 B, Summer 2024', url: SECTION },
-    { label: 'ECON 200 B syllabus, Summer 2024 (Alfredo Effendy)', url: SYL },
+    { label: 'UW Time Schedule, Summer 2024: ECON 200 B', url: SCHEDULE },
   ],
 };

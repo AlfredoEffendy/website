@@ -56,6 +56,13 @@ describe('home page', () => {
     expect(html).toMatch(/<img class="h-photo" src="\.\/img\/alfredo-effendy-200\.webp" srcset="[^"]*\.\/img\/alfredo-effendy-400\.webp 2x" width="200" height="200" alt="Alfredo Effendy"/);
   });
 
+  it('shows the job-market line in red, as on the Google Site', async () => {
+    const { readFileSync } = await import('node:fs');
+    const css = readFileSync(new URL('../src/styles/home.css', import.meta.url), 'utf8');
+    expect((await home()).body('./')).toContain('<p class="h-market">I am on the 2026–2027 academic job market.</p>');
+    expect(css).toMatch(/\.h-market\s*\{[^}]*color:\s*var\(--bad\)/);
+  });
+
   it('stays plain: no hero, cards, key-number tiles or buttons', async () => {
     const html = (await home()).body('./');
     expect(html).not.toMatch(/<dl|class="btn|h-hero|h-paper|h-tool/);

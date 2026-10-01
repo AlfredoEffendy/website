@@ -55,11 +55,27 @@ describe('teaching overview', () => {
 describe('every course page', () => {
   const slugs = { 'bbus-221': ['winter-2026', 'spring-2026'], 'qmeth-201': ['summer-2025'], 'econ-301': ['winter-2025'], 'econ-200': ['summer-2024'] };
 
-  it('links only the author\'s own syllabi, served by this site, and no other instructor\'s materials', () => {
+  /** Each course's Sources: the UW catalogue, plus the public UW Time Schedule where there is one. */
+  const SOURCES = {
+    'bbus-221': ['https://www.washington.edu/students/crscatb/bbus.html#bbus221'],
+    'qmeth-201': ['https://www.washington.edu/students/crscat/qmeth.html#qmeth201', 'https://www.washington.edu/students/timeschd/SUM2025/qmeth.html#qmeth201'],
+    'econ-301': ['https://www.washington.edu/students/crscat/econ.html#econ301', 'https://www.washington.edu/students/timeschd/WIN2025/econ.html#econ301'],
+    'econ-200': ['https://www.washington.edu/students/crscat/econ.html#econ200', 'https://www.washington.edu/students/timeschd/SUM2024/econ.html#econ200'],
+  };
+
+  it('lists only the catalogue and the time schedule as sources, and links nothing else outside the site', () => {
+    for (const [slug, expected] of Object.entries(SOURCES)) {
+      const html = page(`teaching/${slug}/index.html`).body('../../');
+      const sources = html.match(/<ol class="c-sources">([\s\S]*?)<\/ol>/)[1];
+      expect([...sources.matchAll(/href="([^"]+)"/g)].map((m) => m[1]), slug).toEqual(expected);
+      const external = new Set([...html.matchAll(/href="(https?:[^"]+)"/g)].map((m) => m[1]));
+      expect([...external].filter((u) => !expected.includes(u)), slug).toEqual([]);
+    }
+  });
+
+  it('still links the author\'s own syllabi in the line under the title', () => {
     for (const [slug, terms] of Object.entries(slugs)) {
       const html = page(`teaching/${slug}/index.html`).body('../../');
-      const external = [...html.matchAll(/href="(https?:[^"]+)"/g)].map((m) => m[1]);
-      expect(external.filter((u) => /syllab|cnedita|summer-2024$/i.test(u)), slug).toEqual([]);
       for (const t of terms) expect(html, slug).toContain(`href="../../files/syllabi/${slug}-${t}.pdf"`);
     }
   });
@@ -70,7 +86,6 @@ describe('QMETH 201 course page', () => {
 
   it('draws its topics from the author\'s own Summer 2025 syllabus, not a 2005 one', () => {
     expect(html).not.toMatch(/htamura|Tamura|2005/);
-    expect(html).toContain('<a href="../../files/syllabi/qmeth-201-summer-2025.pdf">QMETH 201 syllabus, Summer 2025 (Alfredo Effendy)</a>');
     expect(text(html)).toContain('Hypothesis tests for one population mean and for one population proportion.');
   });
 });
@@ -79,9 +94,7 @@ describe('B BUS 221 course page', () => {
   const html = page('teaching/bbus-221/index.html').body('../../');
 
   it('draws its topics from the author\'s own 2026 syllabi, not other instructors\' ECON 201 syllabi', () => {
-    expect(html).not.toMatch(/ECON 201 [ACD] syllabus|syllabi\/2025\/|Econ%20201|Syllabus_201D/);
-    expect(html).toContain('<a href="../../files/syllabi/bbus-221-winter-2026.pdf">B BUS 221 syllabus, Winter 2026 (Alfredo Effendy)</a>');
-    expect(html).toContain('<a href="../../files/syllabi/bbus-221-spring-2026.pdf">B BUS 221 syllabus, Spring 2026 (Alfredo Effendy)</a>');
+    expect(html).not.toMatch(/ECON 201 [ACD] syllabus|syllabi\/2025\/|Econ%20201|Syllabus_201D|cnedita/);
     expect(text(html)).toContain('Money and banking; monetary policy and the Federal Reserve System.');
   });
 });
