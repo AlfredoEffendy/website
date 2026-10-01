@@ -1,213 +1,32 @@
-/* Teaching: the overview (teaching/) and the course pages (teaching/<slug>/). Tokens only; both themes.
-   Purple marks the solo-instructor record and live state, gold the reference (catalogue, TA record). */
+/* Teaching: the overview (plain lists) and the course pages (plain text around each interactive). */
 
-/* Moving between teaching pages cross-fades; a course code on its card grows into the page heading. */
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition { navigation: auto; }
-}
-::view-transition-group(*) { animation-duration: 0.32s; animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
+/* Overview: course lines with their quarters underneath. */
+.t-list { display: grid; gap: var(--s-3); }
+.t-list li { line-height: 1.6; }
 
-.t-wrap { width: min(72rem, 100% - 2rem); margin-inline: auto; }
-.teach, .course { padding-bottom: var(--s-12); }
-.t-body, .c-body { display: grid; gap: var(--s-12); padding-top: var(--s-8); }
+/* Course pages: wider than the other pages, so the interactive has room. */
+.page.course { width: min(100% - 2 * var(--s-4), 68rem); }
+.c-back { margin-bottom: var(--s-2); font-size: 0.875rem; }
+.c-back a::before { content: "\2190\00a0"; }
+.course h1 { margin-bottom: var(--s-2); }
+.c-meta { color: var(--muted); }
+.c-lead { max-width: 62ch; margin-bottom: var(--s-4); color: var(--muted); }
 
-/* ---- page header: graph paper that fades out downwards ---------------------------------------- */
-.c-head { position: relative; isolation: isolate; background: var(--surface); border-bottom: 1px solid var(--line); padding-block: var(--s-8) var(--s-6); }
-.c-head::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper-grid); -webkit-mask: linear-gradient(to bottom, #000 30%, transparent); mask: linear-gradient(to bottom, #000 30%, transparent); }
-.c-head .t-wrap { display: grid; gap: var(--s-3); }
-.c-head h1 { font: 600 clamp(1.875rem, 1.3rem + 2.2vw, 2.75rem)/1.08 var(--font-display); letter-spacing: -0.005em; text-wrap: balance; }
-.t-from a, .c-crumb a { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 2rem; color: var(--muted); transition: color .15s; }
-.t-from a:hover, .c-crumb a:hover { color: var(--accent); }
-.t-from a { font: inherit; }
-.t-from a::after { content: "\2192"; transition: transform .2s cubic-bezier(.2,.7,.2,1); }
-.t-from a:hover::after { transform: translateX(3px); }
-.c-crumb a { font: 600 0.6875rem/1.3 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; }
-.c-crumb a::before { content: "\2190"; transition: transform .2s cubic-bezier(.2,.7,.2,1); }
-.c-crumb a:hover::before { transform: translateX(-3px); }
-.t-lead { max-width: 58ch; font-size: 1rem; line-height: 1.6; color: var(--muted); text-wrap: pretty; }
-.t-stats { max-width: 40rem; margin-top: var(--s-2); }
-.t-stats .stat b { font-size: 1.75rem; }
-
-/* Section labels: small caps in gold behind a purple rule (as About Me). */
-.t-h2 { font: 600 0.75rem/1.3 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-ink); display: flex; align-items: center; gap: var(--s-3); }
-.t-h2::before { content: ""; width: 1.5rem; height: 1px; flex: none; background: var(--accent); }
-.t-sec { display: grid; gap: var(--s-4); }
-.t-sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-1) var(--s-4); }
-
-/* ---- overview: solo-instructor cards ----------------------------------------------------------- */
-/* Hover: the card lifts a little, a soft purple glow sits behind it, and a light (with a hint of graph
-   paper) follows the pointer. Click: it opens in place (grid rows 0fr -> 1fr) to show more. */
-.t-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr)); align-items: start; gap: var(--s-3); }
-.t-card { position: relative; isolation: isolate; display: grid; gap: var(--s-2); align-content: start; padding: var(--s-4) var(--s-4) var(--s-4) calc(var(--s-4) + 3px);
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: inset 3px 0 0 var(--accent);
-  transition: border-color .25s, box-shadow .35s, transform .35s cubic-bezier(.2,.7,.2,1); }
-.t-card::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; opacity: 0; transition: opacity .35s;
-  background: radial-gradient(22rem circle at var(--mx, 50%) var(--my, 0%), color-mix(in oklch, var(--accent) 10%, transparent), transparent 70%), var(--paper-grid);
-  -webkit-mask: radial-gradient(16rem circle at var(--mx, 50%) var(--my, 0%), #000 20%, transparent 80%); mask: radial-gradient(16rem circle at var(--mx, 50%) var(--my, 0%), #000 20%, transparent 80%); }
-.t-card[data-card]:hover, .t-card.open { border-color: color-mix(in oklch, var(--accent) 35%, var(--line)); box-shadow: inset 3px 0 0 var(--accent), 0 0 0 1px color-mix(in oklch, var(--accent) 12%, transparent), 0 18px 44px -18px color-mix(in oklch, var(--accent) 45%, transparent); }
-.t-card[data-card]:hover { transform: translateY(-3px); }
-.t-card[data-card]:hover::before, .t-card.open::before { opacity: 1; }
-.t-card:has(.t-card-btn:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
-.t-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-3); }
-.t-code { font: 600 1.375rem/1.1 var(--font-display); color: var(--accent); letter-spacing: 0.02em; }
-.t-when { font: 600 0.8125rem/1 var(--font-display); letter-spacing: 0.06em; color: var(--gold-ink); font-variant-numeric: tabular-nums; }
-.t-card h3 { font: 600 1.125rem/1.25 var(--font-display); }
-/* The title is the button; its hit area covers the whole card head. */
-.t-card-btn { all: unset; cursor: pointer; }
-.t-card-btn::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
-.t-card-btn:focus-visible { outline: 0; }
-.t-unit { font-size: 0.8125rem; color: var(--muted); }
-/* Syllabus links sit above the card's click area (.t-card-btn::after). */
-.t-syl { position: relative; z-index: 2; font-size: 0.8125rem; color: var(--muted); }
-.t-syl-lab { margin-right: 0.35em; font: 600 0.6875rem/1 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-ink); }
-.t-syl a, .c-syl a { font-weight: 600; color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in oklch, currentColor 35%, transparent); text-underline-offset: 3px; transition: text-decoration-color .15s; }
-.t-syl a:hover, .c-syl a:hover { text-decoration-color: currentColor; }
-.t-sum { font-size: 0.875rem; line-height: 1.55; text-wrap: pretty; }
-/* A plus that becomes a minus while open (no rotating arrows). */
-.t-more { position: absolute; top: calc(var(--s-4) + 0.375rem); right: var(--s-4); width: 0.75rem; height: 0.75rem; display: none; }
-.js .t-more { display: block; }
-.t-more::before, .t-more::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; margin-top: -0.75px; background: var(--muted); border-radius: 1px; transition: transform .3s cubic-bezier(.2,.7,.2,1), background-color .2s; }
-.t-more::after { transform: rotate(90deg); }
-.t-card[data-card]:hover .t-more::before, .t-card[data-card]:hover .t-more::after, .open .t-more::before, .open .t-more::after { background: var(--accent); }
-.open .t-more::after { transform: rotate(90deg) scaleX(0); }
-.js .t-card[data-card] .t-card-top { padding-right: var(--s-6); }
-/* Details: shown without JavaScript; with it, they open and close smoothly. */
-.t-detail { position: relative; z-index: 2; display: grid; grid-template-rows: 1fr; transition: grid-template-rows .35s cubic-bezier(.2,.7,.2,1); }
-.js .t-card:not(.open) .t-detail { grid-template-rows: 0fr; }
-.t-detail-in { min-height: 0; overflow: hidden; display: grid; gap: var(--s-2); align-content: start; }
-.t-detail-in > :first-child { margin-top: var(--s-2); padding-top: var(--s-3); border-top: 1px dashed var(--line-strong); }
-.js .t-card:not(.open) .t-detail-in { visibility: hidden; transition: visibility 0s .35s; }
-.t-int { display: flex; align-items: center; gap: var(--s-2); font-size: 0.8125rem; font-weight: 600; color: var(--accent); }
-.t-lead2 { font-size: 0.8125rem; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
-.t-ico { width: 1.125rem; height: 1.125rem; flex: none; display: inline-block; vertical-align: -0.2em; }
-.t-ico circle { fill: var(--surface); }
-.t-kc { display: flex; flex-wrap: wrap; gap: var(--s-1); }
-.t-kc li { padding: 0.15em 0.6em; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 0.75rem; line-height: 1.5; color: var(--ink); }
-.t-open { justify-self: start; margin-top: var(--s-2); }
-.t-open::after { content: "\2192"; margin-left: var(--s-2); transition: transform .25s cubic-bezier(.2,.7,.2,1); }
-.t-open:hover::after { transform: translateX(3px); }
-.t-card.pending { border-style: dashed; box-shadow: inset 3px 0 0 var(--line-strong); }
-.t-card.pending .t-code { color: var(--muted); }
-@media (hover: none) { .t-card[data-card]:hover { transform: none; } }
-
-/* Stats Engine strip. */
-.t-engine { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-4); padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-grid), var(--surface); }
-.t-engine > svg { width: 2.25rem; height: 2.25rem; flex: none; color: var(--accent); }
-.t-engine p { flex: 1 1 20rem; font-size: 0.9375rem; color: var(--muted); text-wrap: pretty; }
-.t-engine p a { color: var(--accent); font-weight: 600; text-decoration: underline; text-decoration-color: var(--accent-soft); text-underline-offset: 4px; }
-.t-engine p a:hover { text-decoration-color: currentColor; }
-
-/* ---- overview: teaching-assistant record ------------------------------------------------------- */
-.ta table { font-size: 0.875rem; }
-.ta th, .ta td { white-space: normal; vertical-align: top; padding: var(--s-3) var(--s-4); }
-.ta thead th { padding-block: var(--s-2); vertical-align: bottom; }
-.ta .ta-yr { width: 6.5rem; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--gold-ink); font-weight: 600; }
-.ta thead .ta-yr { color: var(--muted); }
-.ta .ta-span { width: 13rem; }
-.ta-course b { font: 600 0.9375rem var(--font-display); letter-spacing: 0.02em; color: var(--ink); margin-right: 0.15em; }
-.ta-desc { margin-top: 3px; max-width: 76ch; font-size: 0.8125rem; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
-.ta-desc a { white-space: nowrap; color: var(--muted); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; transition: color .15s; }
-.ta-desc a:hover { color: var(--accent); text-decoration-color: currentColor; }
-.t-also { display: inline-block; margin-left: var(--s-1); padding: 0 0.5em; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font: 600 0.625rem/1.7 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; vertical-align: 0.15em; white-space: nowrap; }
-a.t-also:hover { background: var(--accent); color: var(--on-accent); }
-.ta-unit th { padding: var(--s-3) var(--s-4) var(--s-2); background: var(--tint); font: 600 0.8125rem/1.3 var(--font-display); letter-spacing: 0.02em; text-transform: none; color: var(--ink); }
-.ta-unit th span { margin-left: var(--s-3); font-weight: 400; font-family: var(--font-body); font-size: 0.75rem; color: var(--muted); }
-tbody .ta-unit { border-top: 1px solid var(--line-strong); }
-/* Timeline: one track per course on a shared year axis, graph paper behind. */
-.ta-axis { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
-.ta-track { position: relative; display: block; height: 0.875rem; margin-top: 0.3rem; border-radius: 2px; background: var(--paper-grid); background-size: 100% 100%, calc(100% / var(--years, 9)) 100%, 100% 100%, calc(100% / var(--years, 9) / 4) 100%; box-shadow: inset 0 0 0 1px var(--grid-major); }
-.ta-bar { position: absolute; top: 3px; bottom: 3px; left: var(--a); width: var(--w); min-width: 4px; border-radius: 1px; background: var(--gold); }
-.ta-bar.open { background: linear-gradient(90deg, var(--gold) 55%, transparent); }
-.t-note { font-size: 0.75rem; color: var(--muted); }
-
-/* ---- course page: header ------------------------------------------------------------------------- */
-.c-code { display: block; width: max-content; margin-bottom: var(--s-1); font-size: 0.5em; letter-spacing: 0.06em; color: var(--accent); }
-.c-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-6); margin-top: var(--s-1); font-size: 0.875rem; }
-.c-meta > div { display: flex; align-items: baseline; gap: var(--s-2); }
-.c-meta dt { font: 600 0.6875rem/1.3 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.c-meta dd { color: var(--ink); }
-.badge.solo { color: var(--accent); background: var(--accent-soft); border-color: transparent; padding-inline: 0.7em; }
-.badge.solo::before { content: ""; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: currentColor; }
-.c-src { margin-left: var(--s-1); font-size: 0.8125rem; color: var(--muted); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
-.c-src:hover { color: var(--accent); }
-
-/* ---- course page: the interactive -------------------------------------------------------------- */
-.c-tool { display: grid; gap: var(--s-4); min-width: 0; }
-.c-tool-head { display: grid; gap: var(--s-1); }
-.c-tool-head .cap { display: flex; align-items: center; gap: var(--s-2); color: var(--accent); }
-.c-tool-head h2 { font: 600 1.5rem/1.2 var(--font-display); }
-.c-lead { max-width: 62ch; color: var(--muted); text-wrap: pretty; }
+/* The interactive: controls beside the output on wide screens (course-*.css build on these). */
 .c-tool-body { display: grid; gap: var(--s-3); min-width: 0; }
-/* Optional layout helpers for interactives: controls beside the output on wide screens. */
 .c-split { display: grid; gap: var(--s-3); align-items: start; }
 .c-panel { display: grid; gap: var(--s-3); align-content: start; padding: var(--s-4); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
 .c-out { display: grid; gap: var(--s-3); min-width: 0; }
 @media (min-width: 60rem) { .c-split { grid-template-columns: minmax(16rem, 20rem) minmax(0, 1fr); } }
 
-/* ---- course page: what it covers ---------------------------------------------------------------- */
-.c-sec { display: grid; gap: var(--s-4); }
-.c-quote { display: grid; gap: var(--s-2); padding: var(--s-4) var(--s-4) var(--s-3) calc(var(--s-4) + 3px); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: inset 3px 0 0 var(--gold); }
-.c-quote blockquote { margin: 0; }
-.c-quote p { max-width: 72ch; font-size: 0.9375rem; line-height: 1.65; text-wrap: pretty; }
-.c-quote p::before { content: "\201C"; } .c-quote p::after { content: "\201D"; }
-.c-quote figcaption { font-size: 0.8125rem; }
-.c-quote figcaption a, .c-sources a, .c-k-src a { color: var(--muted); transition: color .15s; }
-.c-quote figcaption a:hover, .c-sources a:hover, .c-k-src a:hover { color: var(--accent); }
-.c-host { color: var(--muted); font-size: 0.9em; opacity: 0.85; }
-/* At most --cols columns (set from the number of concepts), fewer when narrow. */
-.c-concepts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(15rem, 100% / var(--cols, 3) - 1px)), 1fr)); overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); counter-reset: k; }
-.c-concepts li { counter-increment: k; display: grid; grid-template-rows: auto 1fr auto; gap: var(--s-2); padding: var(--s-4); box-shadow: 1px 0 0 var(--line), 0 1px 0 var(--line); transition: background-color .2s; }
-.c-concepts li:hover { background: var(--accent-soft); }
-.c-concepts h3 { display: flex; align-items: baseline; gap: var(--s-2); font: 600 1rem/1.3 var(--font-display); }
-.c-concepts h3::before { content: counter(k, decimal-leading-zero); flex: none; font: 600 0.6875rem/1 var(--font-display); letter-spacing: 0.12em; color: var(--gold-ink); }
-.c-concepts p { font-size: 0.875rem; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
-.c-k-src { font-size: 0.75rem; }
-
-/* Related labs: numbered as in the Σ menu. */
-.c-labs ul { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-.c-labs a { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 2.5rem; padding: 0 var(--s-4) 0 var(--s-3); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); font-size: 0.875rem; font-weight: 600; transition: border-color .15s, color .15s, background-color .15s; }
-.c-labs a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
-.c-labs small { font: 600 0.625rem/1 var(--font-display); letter-spacing: 0.12em; color: var(--gold-ink); }
-
-.c-sources ol { display: grid; gap: var(--s-1); counter-reset: s; font-size: 0.8125rem; }
-.c-sources li { counter-increment: s; display: grid; grid-template-columns: 1.75rem 1fr; }
-.c-sources li::before { content: counter(s); font: 600 0.75rem/1.6 var(--font-display); color: var(--gold-ink); }
+/* What the course covers: the catalogue description, then the topics. */
+.c-quote { margin: 0 0 var(--s-4); padding-left: var(--s-4); border-left: 3px solid var(--line-strong); }
+.c-quote p:first-child { font-style: italic; }
+.c-cite { font-size: 0.875rem; color: var(--muted); }
+.c-concepts dt { margin-top: var(--s-3); font-weight: 600; }
+.c-concepts dd { margin: 0; }
+.c-src { font-size: 0.8125rem; }
+.c-list { display: grid; gap: var(--s-1); }
+.c-sources { display: grid; gap: var(--s-1); padding-left: 1.5rem; list-style: decimal; font-size: 0.875rem; }
 .c-sources a { overflow-wrap: anywhere; }
-
-/* Previous / next. */
-.c-pager { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: var(--s-3); padding-top: var(--s-6); border-top: 1px solid var(--line); }
-.c-prev, .c-next { display: grid; gap: 2px; align-content: start; padding: var(--s-3) var(--s-4); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); transition: border-color .2s, background-color .2s; }
-.c-next { text-align: right; }
-.c-none { border-color: transparent; background: none; }
-a.c-prev:hover, a.c-next:hover { border-color: var(--accent); background: var(--accent-soft); }
-.c-prev .cap::before { content: "\2190\00a0"; } .c-next .cap::after { content: "\00a0\2192"; }
-.c-prev b, .c-next b { font: 600 1rem/1.3 var(--font-display); color: var(--accent); }
-.c-pg-t { font-size: 0.8125rem; color: var(--muted); }
-.c-all { align-self: center; display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 var(--s-3); font: 600 0.6875rem/1 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-radius: var(--radius); transition: color .15s, background-color .15s; }
-.c-all:hover { color: var(--accent); background: var(--accent-soft); }
-
-/* ---- phone ---------------------------------------------------------------------------------------- */
-@media (max-width: 40rem) {
-  .c-head { padding-block: var(--s-6) var(--s-4); }
-  .t-body, .c-body { gap: var(--s-8); padding-top: var(--s-6); }
-  .t-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .t-stats .stat { padding: var(--s-3); }
-  .t-stats .stat span { letter-spacing: 0.06em; }
-  .t-card { padding-right: var(--s-3); }
-  .ta table, .ta thead, .ta tbody, .ta tr, .ta th, .ta td { display: block; }
-  .ta tr:not(.ta-unit) { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); align-items: center; gap: var(--s-1) var(--s-3); padding: var(--s-3); }
-  .ta td, .ta th { width: auto !important; padding: 0; }
-  .ta .ta-course, .ta thead th:first-child { grid-column: 1 / -1; }
-  .ta thead th:first-child { display: none; }
-  .ta .ta-yr { font-size: 0.8125rem; }
-  .ta-track { margin-top: 0; }
-  .ta-unit th { padding: var(--s-3) var(--s-3) var(--s-2); }
-  .ta-unit th span { display: block; margin: 2px 0 0; }
-  .c-pager { grid-template-columns: 1fr 1fr; }
-  .c-all { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
-  .c-none { display: none; }
-  .c-pager:has(.c-prev.c-none) .c-next, .c-pager:has(.c-next.c-none) .c-prev { grid-column: 1 / -1; }
-}
-@media print {
-  .c-head::before, .t-card::before, .c-pager, .t-engine { display: none; }
-}
+.c-pager { margin-top: var(--s-8); padding-top: var(--s-4); border-top: 1px solid var(--line); }

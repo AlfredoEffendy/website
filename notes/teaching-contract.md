@@ -5,13 +5,14 @@ template, shared styles); four agents each build **one course** (content + inter
 the interface between them. Neither side edits the other's files.
 
 ## Routes
-- `teaching/index.html` — overview: instructor-of-record courses first (cards), then the TA record.
+- `teaching/index.html` — overview, plain like the author's Google Site: instructor-of-record courses by unit (each linking to
+  its page, with its quarters and syllabi), then the TA courses with their quarters.
 - `teaching/<slug>/index.html` — one page per instructor-of-record course. Slugs: `bbus-221`, `qmeth-201`, `econ-301`, `econ-200`.
 
 ## Files
 | Owner | Files |
 |---|---|
-| Kit | `tools/pages/teaching.mjs` (exports `pages`), `src/styles/teaching.css`, `src/pages/teaching.ts` (index behaviour, optional) |
+| Kit | `tools/pages/teaching.mjs` (exports `pages`), `src/styles/teaching.css` (no overview script: the overview is plain markup) |
 | Course `<slug>` | `tools/pages/courses/<slug>.mjs` (exports `course`, **never** `pages`), `src/pages/courses/<slug>.ts` (entry), optional `src/styles/course-<slug>.css` |
 
 The generator imports every `.mjs` under `tools/pages/` and only uses an export named `pages`, so the
@@ -46,10 +47,11 @@ export const course = {
 ```
 
 ## Course page layout (rendered by the kit)
-1. Header: code + title, role badge ("Instructor of record"), unit, when (with source link if a quarter is cited), and the
-   syllabus PDFs listed in `tools/syllabi.mjs` (also linked from the overview cards and the C.V.).
-2. The interactive (the first thing below the header, tool-like, using `.figure`/`.plot` from base.css where it is a chart).
-3. "What the course covers": catalogue description (quoted, linked) + the concepts as a compact grid.
+1. Header, plain: a link back to Teaching, `<h1>` "code: title", and one line "Instructor of record · unit · when · Syllabus:
+   links" (syllabus PDFs from `tools/syllabi.mjs`, also linked from the overview and the C.V.).
+2. The interactive (the first thing below the header, tool-like, using `.figure`/`.plot` from base.css where it is a chart). The
+   interactive is the only styled part of the page.
+3. "What the course covers": catalogue description (quoted, linked) + the concepts as a plain list.
 4. Related Stats Engine labs (if any), then sources.
 5. Previous / next course navigation and a link back to `teaching/`.
 

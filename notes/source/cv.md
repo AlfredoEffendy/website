@@ -83,6 +83,16 @@ with the TA role below).
 | 2018 | ACMS 30530: Introduction to Probability | ACMS Department, University of Notre Dame |
 | 2018 | ACMS 10145: Statistics for Business | ACMS Department, University of Notre Dame |
 
+### Teaching-assistant quarters (author-provided: Google Site, read 2026-10-01)
+Shown on the Teaching page, oldest first. BUS AN 510: Summer 2025, Summer 2026. SCM 501: Summer 2026. QMETH 201: Spring
+2024, Fall 2024, Fall 2025. STAT 311: Summer 2022, Spring 2023, Summer 2023, Fall 2023, Winter 2024, Spring 2024.
+ECON 201: Winter 2022, Fall 2022, Winter 2023. ECON 345: Spring 2022. ACMS 37020: Spring 2019, Fall 2019. ACMS 30600:
+Fall 2019. ACMS 30010: Spring 2019. ACMS 20620: Spring 2019. ACMS 30530: Fall 2018. ACMS 10145: Fall 2018.
+
+## Home page wording (author-provided: Google Site, read 2026-10-01; "Economic" corrected to "Economics")
+"I am an Economics Ph.D. candidate at the University of Washington. My research interests are in International Finance,
+Asset Pricing, Risk Management, and Big Data Analysis. I am on the 2026–2027 academic job market."
+
 ## Professional Service
 - 2024–2026 — Macroeconomics and International Trade Seminar and Brownbag Organizer
 - 2022–2024 — **President**, Graduate Student Committee, Department of Economics

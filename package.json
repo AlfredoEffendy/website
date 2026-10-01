@@ -7,7 +7,7 @@
   "scripts": {
     "pages": "node tools/gen-pages.mjs",
     "dev": "node tools/gen-pages.mjs && vite",
-    "build": "node tools/gen-pages.mjs && tsc --noEmit && vite build && node tools/report-size.mjs",
+    "build": "node tools/gen-pages.mjs && tsc --noEmit && vite build && node tools/report-size.mjs && node tools/check-links.mjs",
     "preview": "vite preview --port 4173",
     "test": "vitest run"
   },

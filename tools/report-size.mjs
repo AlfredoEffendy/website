@@ -48,7 +48,7 @@ const rows = pages.map((page) => {
   const html = gz(page);
   const js = [...entry].reduce((s, f) => s + gz(f), 0);
   const first = html + js + fontBytes;
-  const htmlBudget = name === '/' ? BUDGET.html : BUDGET.articleHtml;
+  const htmlBudget = name === '/stats-engine' ? BUDGET.html : BUDGET.articleHtml;
   if (html > htmlBudget) problems.push(`${name}: html ${html} > ${htmlBudget}`);
   if (js > BUDGET.entryJs) problems.push(`${name}: entry JS ${js} > ${BUDGET.entryJs}`);
   if (first > BUDGET.first) problems.push(`${name}: first load ${first} > ${BUDGET.first}`);

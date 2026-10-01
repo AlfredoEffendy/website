@@ -1,0 +1,5 @@
+/* Research: each paper as a title with its abstract underneath. */
+.r-paper + .r-paper { margin-top: var(--s-6); }
+.r-paper h3 { font-size: 1.0625rem; }
+.r-tag { font-family: var(--font-body); font-weight: 400; color: var(--muted); }
+.r-abstract { margin-top: var(--s-2); max-width: 70ch; line-height: 1.65; text-wrap: pretty; }

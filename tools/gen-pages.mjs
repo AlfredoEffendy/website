@@ -1,6 +1,6 @@
 // Generates every HTML page. Each page is complete markup with its CSS inlined, so the first
 // response alone paints it; scripts then attach to what is already there.
-//   index.html                 the lab workspace (tools/labs.mjs)
+//   stats-engine/index.html    the lab workspace (tools/labs.mjs)
 //   <path>/index.html          one per entry exported by tools/pages/*.mjs
 //   public/404.html            self-contained, from src/404.html
 // Also copies fonts and everything in static/ into public/, and writes .pages.json for Vite.
@@ -8,7 +8,6 @@ import { copyFileSync, cpSync, existsSync, mkdirSync, readdirSync, readFileSync,
 import { dirname, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { LABS, figure, seedRow } from './labs.mjs';
-import { ABOUT_SECTIONS, aboutMe } from './about.mjs';
 import { LOADER, ROOT, THEME_BOOT, css, footer, head, rootOf, topbar } from './shell.mjs';
 
 const DEFAULT = LABS[0].slug;
@@ -41,7 +40,7 @@ const written = [];
 // One rule set shows the active lab; the attribute is set before first paint by the boot script.
 const on = (prefix) => LABS.map((l) => `html[data-lab="${l.slug}"] #${prefix}-${l.slug}`).join(',');
 const tabRules = `${on('panel')},${on('notes')}{display:grid}${on('tab')}{color:var(--ink);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}`;
-const labCss = css(['lab'], './', (s) => s.replace('/*TABS*/', tabRules));
+const labCss = css(['lab'], '../', (s) => s.replace('/*TABS*/', tabRules));
 
 // Phone only: opens the full settings sheet from the dock. θ is the usual symbol for "the parameters".
 const MORE = `<button class="btn dock-more" type="button" aria-label="All settings" aria-expanded="false"><i>θ</i></button>`;
@@ -87,12 +86,13 @@ const index = `${head({
     'Six statistics simulations in one fast tool: distributions, sampling distributions, confidence intervals and regression, each with a live equation and exact theory. Bring your own data too.',
   style: labCss,
   boot: BOOT,
+  root: '../',
 })}
 <noscript><style>#panel-${DEFAULT},#notes-${DEFAULT}{display:grid}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the tool</a>
-${topbar({ root: './', current: 'labs', lab: true })}
+${topbar({ root: '../', current: 'labs', lab: true })}
 <main id="main" class="app">
 <div class="tabs" id="tabs" role="tablist" aria-label="Simulations" aria-orientation="vertical">
 ${LABS.map(tab).join('\n')}
@@ -103,13 +103,13 @@ ${LABS.map(panel).join('\n')}
 ${LABS.map(notes).join('\n')}
 <noscript><p>The simulations need JavaScript.</p></noscript>
 </div>
-${footer('./')}
+${footer()}
 <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
 `;
-write('index.html', index);
-written.push('index.html');
+write('stats-engine/index.html', index);
+written.push('stats-engine/index.html');
 
 // ---- registered pages ----------------------------------------------------------------------
 // Each module in tools/pages/ exports `pages`: an array (or a function returning one) of
@@ -126,17 +126,13 @@ for (const file of modules) {
   const list = typeof mod.pages === 'function' ? await mod.pages() : mod.pages;
   for (const p of list) {
     const root = rootOf(p.path);
-    // Pages in the About Me menu end with the shared About Me paragraph (opt out with about: false).
-    const about = ABOUT_SECTIONS.has(p.current) && p.about !== false;
-    const groups = [...(p.css ?? []), ...(about ? ['about'] : [])];
-    const html = `${head({ title: p.title, description: p.description, style: css(groups, root), root, extra: p.extraHead ?? '' })}
+    const html = `${head({ title: p.title, description: p.description, style: css(p.css ?? [], root), root, extra: p.extraHead ?? '' })}
 </head>
 <body${p.bodyClass ? ` class="${p.bodyClass}"` : ''}>
 <a class="skip" href="#main">Skip to content</a>
-${topbar({ root, current: p.current, tagline: p.tagline })}
+${topbar({ root, current: p.current })}
 ${p.body(root)}
-${about ? aboutMe() : ''}
-${footer(root)}
+${footer()}
 <script type="module" src="/${p.entry ?? 'src/site.ts'}"></script>
 </body>
 </html>

@@ -1,8 +1,9 @@
-# Stats Engine
+# Alfredo Effendy: academic website
 
-Alfredo Effendy's teaching site. At its centre is **Stats Engine**, one fast lab workspace that replaces seven separate
-statistics teaching labs. It has six simulations and a "Your data" tab, with exact statistics and live equations.
-Around it sit Research, Teaching (one page per course taught as instructor of record, with its syllabus) and C.V. pages.
+A plain academic site for the 2026–2027 job market: Home, C.V., Research (the job market paper's title, PDF and
+abstract) and Teaching. The interactive material is all in teaching: each course taught as instructor of record has a
+page with an interactive illustration and its syllabus, and **Stats Engine** (`stats-engine/`) is one fast lab
+workspace with six statistics simulations and a "Your data" tab, with exact statistics and live equations.
 
 Static site: Vite and plain TypeScript. There is no UI framework, no chart library and no third-party request.
 
@@ -30,11 +31,12 @@ npm run preview
 npm test
 ```
 
-`npm run build` does four things:
+`npm run build` does five things:
 1. writes every HTML page (`tools/gen-pages.mjs`);
 2. type-checks;
 3. bundles the site into `dist/`;
-4. prints a size report that fails the build if a budget is broken.
+4. prints a size report that fails the build if a budget is broken;
+5. checks that every internal link resolves (`tools/check-links.mjs`).
 
 `dist/` works from any folder or sub-path. All links are relative.
 
@@ -44,27 +46,29 @@ npm test
 
 | Path | What it holds |
 |---|---|
-| `tools/gen-pages.mjs` | Writes every page: CSS is inlined, and the shared head, top bar, footer and About Me are added |
-| `tools/shell.mjs` | Shared chrome: logo, author menu, routes, footer text, author name and links |
+| `tools/gen-pages.mjs` | Writes every page: CSS is inlined, and the shared head, top bar and footer are added |
+| `tools/shell.mjs` | Shared chrome: routes (`ROUTES`, `labHref`), the top bar, the footer, the theme boot script |
 | `tools/syllabi.mjs` | The course syllabi (PDFs in `static/files/syllabi/`, redacted before publishing), linked from Teaching and the C.V. |
-| `tools/about.mjs` | The one About Me paragraph shown at the end of the Research, Teaching and C.V. pages |
-| `tools/labs.mjs` | The lab workspace: every tab's controls, chart frame, equation and notes |
-| `tools/pages/*.mjs` | Every other page. Each module exports `pages` (see `notes/site-architecture.md`) |
+| `tools/labs.mjs` | The lab workspace (`stats-engine/index.html`): every tab's controls, chart frame, equation and notes |
+| `tools/check-links.mjs` | Fails the build when a page links to a file that is not in `dist/` |
+| `tools/make-headshot.py` | Crops `notes/source/headshot.jpg` into the home page's WebP sizes in `static/img/` |
+| `tools/pages/*.mjs` | Every other page (`home`, `cv`, `research`, `teaching`). Each module exports `pages` (see `notes/site-architecture.md`) |
 | `tools/pages/courses/*.mjs` | One module per course, in the shape set by `notes/teaching-contract.md` |
 | `src/main.ts`, `src/labs/` | Workspace entry, plus one lazily loaded module per lab |
 | `src/core/` | Seeded random numbers, exact distributions, statistics/OLS, CSV parser and worker, radix sort, limits |
-| `src/ui/` | Canvas plot helper, equation animation, data table, export, figure viewer, scroll marker, menus |
-| `src/pages/` | Small entry scripts for the teaching, course and research pages |
-| `src/styles/` | `base`, `topbar` and `scroll` go on every page; the other files are per-page groups |
-| `static/` | Served as-is: the C.V., paper and syllabus PDFs, and the paper's figures (`tools/extract-figures.py` regenerates them) |
+| `src/ui/` | Canvas plot helper, equation animation, data table, export, scroll marker, shared page chrome |
+| `src/pages/` | Entry scripts for the course pages' interactives |
+| `src/styles/` | `base`, `topbar` and `scroll` go on every page; `page` is the plain-page column; the rest are per-page groups |
+| `static/` | Served as-is: the C.V., paper and syllabus PDFs, and the headshot (`img/`) |
 | `notes/` | The contributor contract, the course-page contract, and the content sources (C.V. transcription, paper text) |
 | `tests/` | Reference-value tests for the maths, CSV parser and sort |
 
-Generated files are git-ignored: `index.html`, `research/`, `teaching/`, `cv/`, `public/` and `.pages.json`. Edit the sources instead.
+Generated files are git-ignored: `index.html`, `stats-engine/`, `research/`, `teaching/`, `cv/`, `public/` and `.pages.json`. Edit the sources instead.
 
 ## Rules worth keeping
 
-- **Content.** Facts about the author come only from `notes/source/cv.md` and the paper. Course facts come from cited public catalogues. Never invent dates, numbers or quotes. Never publish the phone number or referees' emails.
+- **Plain look.** Home, C.V., Research and Teaching stay plain, like a faculty page: text, lists and links; no animations, cards, chips or decorative backgrounds. Interactive material belongs to the course pages and Stats Engine.
+- **Content.** Facts about the author come only from `notes/source/cv.md` (which also records the author's Google Site wording and TA quarters) and the paper. Course facts come from cited public catalogues. Never invent dates, numbers or quotes. Never publish the phone number or referees' emails.
 - **Colour.** Purple means simulated or observed; gold means theory. UW Spirit Purple `#4b2e83` and Heritage Gold `#85754d`; Encode Sans Condensed with Open Sans.
 - **Writing and themes.** Use few words and keep the tool-like voice. Both themes must work, so use design tokens and never hard-code colours.
 - **Shareable runs.** A link reproduces a run, because settings and the seed live in the query string (`?lab=clt-mean&n=30&seed=5`).
@@ -73,7 +77,7 @@ Generated files are git-ignored: `index.html`, `research/`, `teaching/`, `cv/`, 
   | What | Budget | Now |
   |---|---|---|
   | Workspace HTML+CSS | 24 KB | about 20 KB |
-  | Other pages' HTML+CSS | 30 KB | the article is about 28.4 KB |
+  | Other pages' HTML+CSS | 30 KB | each well under |
   | Start-up JS per page | 20 KB | |
   | Each lazy chunk | 8 KB | |
   | All JS | 70 KB | about 66 KB |

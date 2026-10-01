@@ -1,106 +1,114 @@
-# Home page and site navigation: design
+# Plain academic site with interactive teaching: design (revision 2)
 
 Date: 2026-10-01. Status: approved in conversation, awaiting spec review.
 Rollback point: git tag `before-home-page` (the site with Stats Engine at the root).
 
+Revision 2 replaces revision 1 (paper-first home page, Tools menu, decorative styling). Kept from revision 1 and
+already built on branch `worktree-home-page`: the link checker (`tools/check-links.mjs`), Stats Engine at
+`stats-engine/` with old `/?lab=…` links forwarded, and the site root as the home page.
+
 ## Goal
 
-Make the site's front door about Alfredo Effendy, for **academic job market committees**. Stats Engine stops being
-the home page and becomes one of the site's tools. Success: a committee member landing on the site sees who the author is,
-the fields, the job market paper and how to get the C.V. within the first screen, and every existing page and shared
-lab link still works.
+A simple academic website for **job market committees**, in the spirit of the author's Google Site
+(https://sites.google.com/view/alfredoeffendy/home), where the **teaching** section shows more than a list: each
+course taught as instructor of record has an interactive illustration, and Stats Engine collects the statistics
+simulations. Success: the site reads as a plain, personal academic site (not a template), and a committee member
+can reach the C.V., the paper and the interactive teaching pages in one click from the home page.
 
 Decided with the author:
-- Audience: job market committees.
-- Home layout: **paper-first** (name, role, fields, then the job market paper card).
-- Navigation: **visible links** in the top bar, with a Tools menu.
-- Research interests shown anywhere on the site become the C.V. fields: International Finance · Asset Pricing ·
-  Macro-Finance ("Risk Management" and "Big Data Analysis" are dropped).
-- Out of scope here: the Markets page (FOMC probabilities, G10 FX and money-market rates, commodities, indices).
-  It is a separate project with its own spec; this design only leaves a slot for it in the Tools menu and on the home page.
+- Look: **plain academic**, like the Google Site without its dark banner.
+- Research: plain list; the job market paper's title links to its PDF with the **abstract** underneath; the long
+  summary article is retired.
+- Wording follows the Google Site, lightly corrected.
+- Out of scope: the Markets page (FOMC probabilities, G10 rates). It is a separate project; it will add one menu link.
 
-## Addresses
+## Look (every page)
 
-| Page | Before | After |
-|---|---|---|
-| Home | Stats Engine workspace at `/website/` | New home page at `/website/` |
-| Stats Engine | `/website/` | `/website/stats-engine/` |
-| Research, Teaching, C.V., course pages | unchanged | unchanged |
+- Plain background: `var(--paper)` with no grid pattern anywhere outside Stats Engine and the course interactives.
+- Fonts unchanged (Encode Sans Condensed for headings, Open Sans for text). Purple (`--accent`) only for links and
+  headings; body text `--ink`; secondary text `--muted`.
+- Removed: grid-paper backgrounds, entrance/hover animations, stat tiles, cards, chips and badges, "From the C.V."
+  captions, the About Me section at the end of pages, and the theme button. Pages follow the visitor's system
+  light/dark setting (the existing boot script already does; a saved choice from before still applies).
+- Stats Engine's workspace and the course interactives keep their own tool styling: they are the showcase.
 
-Shared lab runs keep working. Old links look like `/website/?lab=clt-mean&n=30&seed=5`. The home page's `<head>`
-runs, before first paint: if the query string has `lab=`, `location.replace('stats-engine/' + location.search +
-location.hash)`. Without a `lab` parameter nothing happens.
-
-`ROUTES` in `tools/shell.mjs` keeps `home: ''` (now the new home page) and gains `labs: 'stats-engine/'`. Every internal link to the
-workspace uses `ROUTES.labs`: the lab links on course pages (`${root}${ROUTES.labs}?lab=…`), "Try the labs" at the end
-of the research article, the Stats Engine box on the Teaching page, the footer, and the Tools menu. The 404 page's
-button becomes "Home" (its href logic already resolves the project sub-path).
-
-## Top bar (every page)
+## Top bar and footer
 
 ```
-[Σ] Alfredo Effendy   <tagline>            Research  Teaching  C.V.  Tools ▾  ☾
-                                                                  ├ Stats Engine
-                                                                  └ (Markets, project 2)
+[Σ] Alfredo Effendy                         Home  C.V.  Research  Teaching  Stats Engine
 ```
+- "Alfredo Effendy" links home. The five links are plain text; the current page's link is marked
+  `aria-current="page"` (purple, underlined). On phones the links wrap onto a second row: no menu button, no script.
+- Stats Engine only: the Σ button that opens its tab rail stays in front of the name, and the workspace keeps a
+  visually hidden `<h1>Stats Engine</h1>` for screen readers.
+- Footer: one line, "Alfredo Effendy · Department of Economics, University of Washington", and the existing
+  "not an official University site" note. No footer menu.
 
-- Left: "Alfredo Effendy" links home (`aria-current="page"` on the home page). On the Stats Engine page only, the Σ
-  button (which opens its tab rail) stays in front of the name, and the tagline is "Stats Engine" (the workspace's
-  `<h1>` stays the tagline element, as today). Elsewhere the tagline is the section name, as today.
-- Right: Research, Teaching and C.V. as plain links (`aria-current` on the active section), then a Tools disclosure
-  menu (button + list, using the existing `disclosure()` in `src/ui/chrome.ts`), then the theme toggle.
-- Phones (narrow widths): Research, Teaching, C.V. and the Tools items fold into one menu button; the theme toggle stays.
-- Removed: the "A.E" author dropdown (and its research-interest tags and "Looking for an academic position" note) and
-  the Σ lab menu on pages other than the workspace. The footer nav gains Home and keeps Stats Engine.
-- `current` values: `'home' | 'research' | 'teaching' | 'cv' | 'labs'`.
+## Pages
 
-## Home page (`tools/pages/home.mjs`, path `index.html`)
+**Home (`index.html`).** `<h1>Alfredo Effendy</h1>`, then (text left, photo right; photo first on phones):
+- "I am an Economics Ph.D. candidate at the University of Washington."
+- "My research interests are in International Finance, Asset Pricing, Risk Management, and Big Data Analysis."
+- "I am on the 2026–2027 academic job market." (in `--accent`)
+- "My Teaching page has the interactive illustrations I built for my courses, and Stats Engine, a statistics tool for
+  teaching." (links to Teaching and Stats Engine)
+- Links: C.V. (PDF) · Job market paper (PDF)
+- Contact: Department of Economics · University of Washington · 319C Savery Hall, Seattle, WA 98195 · aeffendy@uw.edu
+- Headshot: `notes/source/headshot.jpg` → `tools/make-headshot.py` → `static/img/alfredo-effendy-{200,400}.webp`,
+  shown at about 14rem wide with `srcset`, `alt="Alfredo Effendy"`, explicit width/height.
+- Keeps the `<head>` script that forwards old shared lab links (`/?lab=…`) to `stats-engine/`.
 
-Top to bottom:
-1. **Hero.** The author's headshot beside the text on wide screens and above it on phones: square crop, about
-   176 px, the site's corner radius and a hairline border, `alt="Alfredo Effendy"`, explicit width/height, eager load.
-   `<h1>` Alfredo Effendy; "Ph.D. candidate in Economics, University of Washington · expected 2027"; fields
-   line (the three C.V. fields); "On the 2026–2027 academic job market". Actions: Download C.V. (PDF), Job market
-   paper (PDF), email (mailto), UW Economics profile (external).
-2. **Job market paper card.** Title; the one-sentence summary; three key numbers (signal on in 93 of 458 months;
-   4 of the 5 worst carry months inside it; carry spot −8.99%/yr while on); Figure 1 thumbnail; buttons "Read the
-   summary" and "PDF". Text and numbers are imported from `tools/pages/research.mjs` (it exports them) so there is one
-   source.
-3. **Work in progress.** The two titles from `IN_PROGRESS` (`tools/pages/cv.mjs`), linking to Research.
-4. **Teaching.** "Instructor of record for four University of Washington courses", then the four courses (code, title,
-   quarter) linking to their pages, each with its syllabus links (`tools/syllabi.mjs`); a link to Teaching.
-5. **Tools.** A Stats Engine card (logo, one line, "Open Stats Engine"). The Markets card is added in project 2.
+**C.V. (`cv/`).** `<h1>C.V.</h1>`, a line "Download C.V. (PDF) · September 2026", then the C.V. as plain sections
+(`<h2>` Education, Working Papers, Work in Progress, Teaching, Fellowships and Awards, Professional Service,
+Non-Academic Employment, References) with a year column and an entry column. Same facts as now (from
+`notes/source/cv.md`); no phone number or referees' emails; no "Read the summary" button.
 
-No About Me paragraph on the home page (the hero says the same thing); Research, Teaching and C.V. keep theirs.
-Style group `src/styles/home.css`; entry `src/site.ts` (no page script).
+**Research (`research/`).** `<h1>Research</h1>`; `<h2>Working Papers</h2>`: the paper title (as on the PDF, "When Yield
+Curves Invert Together: Currency Crash Risk") linking to the PDF, "(Job Market Paper)", and the paper's abstract
+(verbatim, PDF p. 1); `<h2>Work in Progress</h2>`: the two titles with their C.V. descriptions. The article
+`research/when-yield-curves-invert-together/` is removed with its code and figures.
 
-Headshot files: the author's photo (supplied 2026-10-01, 500×449 JPEG) is kept as `notes/source/headshot.jpg`;
-`tools/make-headshot.py` (Pillow) crops it square and writes `static/img/alfredo-effendy-200.webp` and `-400.webp`
-(`srcset` 1x/2x), each well under the 160 KB image budget. A larger original can replace the source later; rerun the
-script. Facts only from `notes/source/cv.md` and the
-paper, as for every page.
+**Teaching (`teaching/`).** `<h1>Teaching</h1>`, one short paragraph ("Each course I teach as instructor of record has
+a page with an interactive illustration I built for it, the topics it covers and its syllabus. Stats Engine collects
+the statistics simulations I use in class."), then, laid out like the Google Site:
+- `<h2>Instructor of Record</h2>`, grouped by unit (University of Washington Bothell, School of Business; University
+  of Washington, Foster School of Business; University of Washington, Department of Economics). Each course: its
+  code and title linking to its course page, then its quarters with syllabus links, e.g. "Winter 2026 (Syllabus),
+  Spring 2026 (Syllabus)".
+- `<h2>Teaching Assistant</h2>`, grouped by unit, each course with its quarters, oldest first, as listed on the Google
+  Site (recorded in `notes/source/cv.md`).
 
-## Other changes
+**Course pages (`teaching/<slug>/`).** Same content and order (title, interactive, what the course covers, related
+labs, sources, previous/next). Restyled plainly: no header grid or badge; one line under the title: "Instructor of
+record · <unit> · <quarters> · Syllabus: <links>". The interactive itself is unchanged.
 
-- `tools/gen-pages.mjs`: the workspace is written to `stats-engine/index.html` with root `../`; its module script and
-  font preload paths resolve from there. `.pages.json` lists it so Vite builds it.
-- `tools/shell.mjs`: new top bar; `authorMenu` removed; footer adds Home; `LAB_LINKS` hrefs go through `ROUTES.labs`.
-- `src/ui/chrome.ts`: wires the Tools menu and the phone menu; drops the author-menu and Σ-lab-menu wiring for
-  non-workspace pages (the workspace's Σ stays in `src/ui/shell.ts`).
-- `src/styles/topbar.css`: styles for the links, Tools menu and phone menu; author-menu styles removed.
-- Interests: `INTERESTS` in `research.mjs` and `cv.mjs`, and the About Me sentence in `tools/about.mjs`, use the C.V. fields.
-- Docs: README "Where things live" and `notes/site-architecture.md` (routes, `current` values, the redirect).
+**Stats Engine (`stats-engine/`).** Unchanged inside; the plain top bar.
+
+## Data
+
+`notes/source/cv.md` gains, as author-provided (Google Site, read 2026-10-01): the home page wording, and the TA
+quarters: BUS AN 510 Summer 2025, Summer 2026; SCM 501 Summer 2026; QMETH 201 Spring 2024, Fall 2024, Fall 2025;
+STAT 311 Summer 2022, Spring 2023, Summer 2023, Fall 2023, Winter 2024, Spring 2024; ECON 201 Winter 2022, Fall 2022,
+Winter 2023; ECON 345 Spring 2022; ACMS 37020 Spring 2019, Fall 2019; ACMS 30600 Fall 2019; ACMS 30010 Spring 2019;
+ACMS 20620 Spring 2019; ACMS 30530 Fall 2018; ACMS 10145 Fall 2018.
+
+## Removed code
+
+The Tools menu and phone menu (markup, `chrome.ts` wiring, CSS), the theme button, the About Me section
+(`tools/about.mjs`, `src/styles/about.css`), the Teaching overview's cards, stat tiles and TA timeline
+(`src/pages/teaching.ts`), and the research article (its page module part, `src/pages/research.ts`, `src/ui/viewer.ts`
+(used only by the article), `src/styles/article.css`, `static/research/jmp/`, `tools/extract-figures.py`). Like a
+typical faculty page, the paper is just its title, the PDF link and the abstract: no interactive material.
 
 ## Checks
 
-- `npm test` and `npm run build` (type-check and size budgets) pass. Home page HTML+CSS stays under the 30 KB gzip
-  page budget and loads no page-specific JS.
-- New `tools/check-links.mjs`, run at the end of `npm run build`: every relative `href`/`src` in `dist/**/*.html`
-  resolves to a file in `dist/`; fails the build otherwise. This guards the move.
-- In a browser (light and dark, desktop and phone widths): home, Stats Engine (all tabs, Σ rail, `?lab=` deep link),
-  Research, article, Teaching, a course page, C.V., 404; the old `/?lab=regression&seed=7` link lands on that run.
+- `npm test` and `npm run build` pass (type-check, size budgets, `links: all resolve`).
+- Tests pin: the top bar's five links and `aria-current`; the home text, photo, contact and PDF links; the Research
+  abstract and the absence of the article; the Teaching structure (course links, quarters, syllabus links, TA
+  quarters); the C.V. page without the summary button.
+- In a browser, light and dark (system setting), desktop and 375 px: every page; the links wrap on phones without
+  horizontal scrolling; Stats Engine's Σ rail still works; an old `/?lab=regression&seed=7` link lands on that run.
 
 ## Rollback
 
-`git revert` the implementation commits, or reset `main` to tag `before-home-page`, then push; GitHub Pages redeploys
-the previous site.
+`git revert` the implementation commits, or reset `main` to tag `before-home-page`, then push.

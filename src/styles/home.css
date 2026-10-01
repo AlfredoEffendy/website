@@ -1,0 +1,10 @@
+/* Home: text on the left, the photo on the right (photo first on phones). */
+.h-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-8); align-items: start; }
+.h-market { color: var(--accent); font-weight: 600; }
+.home h2 { margin-top: var(--s-6); font-size: 1rem; color: var(--ink); }
+.home address { font-style: normal; line-height: 1.7; }
+.h-photo { width: 14rem; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }
+@media (max-width: 40rem) {
+  .h-grid { grid-template-columns: 1fr; gap: var(--s-6); }
+  .h-photo { order: -1; width: 10rem; }
+}

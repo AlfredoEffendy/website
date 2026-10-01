@@ -6,10 +6,13 @@ dist-*/
 /research/
 /teaching/
 /cv/
+/stats-engine/
 /public/
 /.pages.json
 
-# Local only
+# Local only (.claude: agent worktrees; .superpowers: plan scratch)
 .shots/
 notes/archive/
 *.zip
+.claude/
+.superpowers/
