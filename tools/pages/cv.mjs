@@ -4,6 +4,7 @@
 import { statSync } from 'node:fs';
 import { join } from 'node:path';
 import { EMAIL, ROOT, ROUTES, SITE } from '../shell.mjs';
+import { syllabusLinks } from '../syllabi.mjs';
 
 const CV_PDF = 'files/alfredo-effendy-cv.pdf';
 const JMP_PDF = 'files/when-yield-curves-invert-together.pdf';
@@ -194,12 +195,15 @@ const progress = () =>
   );
 
 function teaching(root) {
-  const solo = SOLO.map((c) =>
-    row(
+  const solo = SOLO.map((c) => {
+    const syllabus = syllabusLinks(c.slug, root);
+    return row(
       year(c.years),
-      `<a class="cv-course" href="${root}${ROUTES.teaching}${c.slug}/"><b class="cv-code" style="view-transition-name:code-${c.slug}">${nb(c.code)}</b> <span class="cv-ctitle">${lastWord(c.title)}</span></a><p class="cv-sub">${c.unit}</p>`,
-    ),
-  ).join('\n');
+      `<a class="cv-course" href="${root}${ROUTES.teaching}${c.slug}/"><b class="cv-code" style="view-transition-name:code-${c.slug}">${nb(c.code)}</b> <span class="cv-ctitle">${lastWord(c.title)}</span></a><p class="cv-sub">${c.unit}</p>${
+        syllabus ? `<p class="cv-sub cv-syl">Syllabus: ${syllabus}</p>` : ''
+      }`,
+    );
+  }).join('\n');
   const ta = TA.map(
     (g) => `<h4 class="cv-h4">${g.unit}<span>, ${g.place}</span></h4>
 <ol class="cv-rows cv-compact">

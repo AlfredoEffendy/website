@@ -1,11 +1,12 @@
-// Teaching: the overview (teaching/index.html) and one page per course taught as solo instructor of
-// record (teaching/<slug>/index.html). Course content and interactives come from
+// Teaching: the overview (teaching/index.html) and one page per course taught as instructor of record
+// (teaching/<slug>/index.html). Course content and interactives come from
 // tools/pages/courses/<slug>.mjs (interface: notes/teaching-contract.md). Facts about the author come
 // only from notes/source/cv.md; course descriptions only from the official catalogues linked here.
 import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { LAB_LINKS, MARK, ROOT, ROUTES, rootOf } from '../shell.mjs';
+import { syllabusLinks } from '../syllabi.mjs';
 
 const COURSE_DIR = join(ROOT, 'tools/pages/courses');
 
@@ -154,14 +155,16 @@ const entryFor = (c) => {
 function header(c, root, alsoTa) {
   const unit = c.unit ?? unitLine(c.unitKey);
   const when = c.whenSource ? `${c.when} ${ext(c.whenSource, 'source<span class="sr"> for the date</span>', 'c-src arrow')}` : c.when;
+  const syllabus = syllabusLinks(c.slug, root);
   return `<header class="c-head">
 <div class="t-wrap">
 <nav class="c-crumb" aria-label="Breadcrumb"><a href="${root}${ROUTES.teaching}">Teaching</a></nav>
 <h1><span class="c-code" style="${vt(c.slug)}">${c.code}</span> <span class="c-title">${c.title}</span></h1>
 <dl class="c-meta">
-<div class="c-role"><dt class="sr">Role</dt><dd><span class="badge solo">Solo instructor</span></dd></div>
+<div class="c-role"><dt class="sr">Role</dt><dd><span class="badge solo">Instructor of record</span></dd></div>
 <div><dt>Unit</dt><dd>${unit}</dd></div>
 ${c.when ? `<div><dt>When</dt><dd>${when}</dd></div>` : ''}
+${syllabus ? `<div><dt>Syllabus</dt><dd class="c-syl">${syllabus}</dd></div>` : ''}
 ${alsoTa ? `<div><dt>Also</dt><dd>Teaching assistant, ${alsoTa.years}</dd></div>` : ''}
 </dl>
 </div>
@@ -262,7 +265,7 @@ ${sources(c)}`;
   return {
     path,
     title: `${c.code}: ${plain(c.title)} · Teaching · Alfredo Effendy`,
-    description: plain(c.summary ?? `${c.code}: ${c.title}, taught by Alfredo Effendy as solo instructor.`),
+    description: plain(c.summary ?? `${c.code}: ${c.title}, taught by Alfredo Effendy as instructor of record.`),
     current: 'teaching',
     tagline: `Teaching · <em>${c.code}</em>`,
     css: styleGroups(['teaching', ...(c.interactive?.css ?? [])], c.slug),
@@ -279,7 +282,7 @@ ${pager(prev, next, root)}
 
 // ---- overview --------------------------------------------------------------------------------------
 /**
- * A solo-instructor card. Hovering lifts it and lights it; one click (or tap) opens it in place to show
+ * An instructor-of-record card. Hovering lifts it and lights it; one click (or tap) opens it in place to show
  * the course's interactive and concepts, with a button to the full course page. Nothing navigates
  * until that button is pressed. Without JavaScript the details are simply shown.
  */
@@ -287,12 +290,15 @@ function card(c, root) {
   const unit = c.unit ?? unitLine(c.unitKey);
   const name = c.interactive?.title;
   const link = c.page;
+  const syllabus = syllabusLinks(c.slug, root);
+  const syl = syllabus ? `<p class="t-syl"><span class="t-syl-lab">Syllabus</span> ${syllabus}</p>` : '';
   const top = `<p class="t-card-top"><span class="t-code"${link ? ` style="${vt(c.slug)}"` : ''}>${c.code}</span><span class="t-when">${c.when}</span></p>`;
   if (!link) {
     return `<li class="t-card pending">
 ${top}
 <h3>${c.title}</h3>
 <p class="t-unit">${unit}</p>
+${syl}
 </li>`;
   }
   const id = `tc-${c.slug}`;
@@ -302,6 +308,7 @@ ${top}
 ${top}
 <h3><button class="t-card-btn" type="button" aria-expanded="false" aria-controls="${id}">${c.title}</button></h3>
 <p class="t-unit">${unit}</p>
+${syl}
 ${c.summary ? `<p class="t-sum">${c.summary}</p>` : ''}
 <span class="t-more" aria-hidden="true"></span>
 <div class="t-detail" id="${id}"><div class="t-detail-in">
@@ -327,7 +334,7 @@ function taTable(root, solo) {
   const taught = new Map(solo.map((c) => [c.code, c]));
   const row = (t) => {
     const also = taught.get(t.code);
-    const tag = also ? (also.page ? `<a class="t-also" href="${root}${route(also.slug)}">Also solo instructor</a>` : '<span class="t-also">Also solo instructor</span>') : '';
+    const tag = also ? (also.page ? `<a class="t-also" href="${root}${route(also.slug)}">Also instructor of record</a>` : '<span class="t-also">Also instructor of record</span>') : '';
     return `<tr>
 <td class="ta-course"><b>${t.code}</b> <span>${t.title}</span>${tag ? ` ${tag}` : ''}${
       t.desc ? `<p class="ta-desc">${t.desc} ${ext(t.src, `<span class="sr">${t.from}: ${t.code}</span><span aria-hidden="true">catalogue</span>`, 'arrow')}</p>` : ''
@@ -361,7 +368,7 @@ function overview(solo) {
   return {
     path: `${ROUTES.teaching}index.html`,
     title: 'Teaching · Alfredo Effendy',
-    description: `Alfredo Effendy's teaching: the University of Washington courses he has taught as solo instructor of record, and his teaching-assistant record.`,
+    description: `Alfredo Effendy's teaching: the University of Washington courses he has taught as instructor of record, and his teaching-assistant record.`,
     current: 'teaching',
     tagline: 'Teaching',
     css: ['teaching'],
@@ -371,9 +378,9 @@ function overview(solo) {
 <div class="t-wrap">
 <p class="cap t-from"><a href="${root}${ROUTES.cv}">From the C.V.</a></p>
 <h1>Teaching</h1>
-<p class="t-lead">Solo instructor of record for ${count(solo.length)} University of Washington courses across ${list(units.map((k) => UNITS[k].short))}.</p>
+<p class="t-lead">Instructor of record for ${count(solo.length)} University of Washington courses across ${list(units.map((k) => UNITS[k].short))}.</p>
 <div class="stats t-stats">
-<div class="stat hero"><span>Solo instructor</span><b>${solo.length}</b><small>courses since ${since}</small></div>
+<div class="stat hero"><span>Instructor of record</span><b>${solo.length}</b><small>courses since ${since}</small></div>
 <div class="stat"><span>Units</span><b>${units.length}</b><small>University of Washington</small></div>
 <div class="stat theory"><span>Teaching assistant</span><b>${TA.length}</b><small>courses since ${taSince}</small></div>
 </div>
@@ -381,7 +388,7 @@ function overview(solo) {
 </header>
 <div class="t-wrap t-body">
 <section class="t-sec" aria-labelledby="t-solo-h">
-<div class="t-sec-head"><h2 class="t-h2" id="t-solo-h">Solo instructor</h2><p class="cap">Most recent first</p></div>
+<div class="t-sec-head"><h2 class="t-h2" id="t-solo-h">Instructor of record</h2><p class="cap">Most recent first</p></div>
 <ol class="t-cards">
 ${solo.map((c) => card(c, root)).join('\n')}
 </ol>

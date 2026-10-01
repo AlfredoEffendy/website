@@ -5,8 +5,8 @@ template, shared styles); four agents each build **one course** (content + inter
 the interface between them. Neither side edits the other's files.
 
 ## Routes
-- `teaching/index.html` — overview: solo-instructor courses first (cards), then the TA record.
-- `teaching/<slug>/index.html` — one page per solo-instructor course. Slugs: `bbus-221`, `qmeth-201`, `econ-301`, `econ-200`.
+- `teaching/index.html` — overview: instructor-of-record courses first (cards), then the TA record.
+- `teaching/<slug>/index.html` — one page per instructor-of-record course. Slugs: `bbus-221`, `qmeth-201`, `econ-301`, `econ-200`.
 
 ## Files
 | Owner | Files |
@@ -46,7 +46,8 @@ export const course = {
 ```
 
 ## Course page layout (rendered by the kit)
-1. Header: code + title, role badge ("Solo instructor"), unit, when (with source link if a quarter is cited).
+1. Header: code + title, role badge ("Instructor of record"), unit, when (with source link if a quarter is cited), and the
+   syllabus PDFs listed in `tools/syllabi.mjs` (also linked from the overview cards and the C.V.).
 2. The interactive (the first thing below the header, tool-like, using `.figure`/`.plot` from base.css where it is a chart).
 3. "What the course covers": catalogue description (quoted, linked) + the concepts as a compact grid.
 4. Related Stats Engine labs (if any), then sources.

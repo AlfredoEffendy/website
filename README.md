@@ -2,7 +2,7 @@
 
 Alfredo Effendy's teaching site. At its centre is **Stats Engine**, one fast lab workspace that replaces seven separate
 statistics teaching labs. It has six simulations and a "Your data" tab, with exact statistics and live equations.
-Around it sit Research, Teaching (one page per solo-instructor course) and C.V. pages.
+Around it sit Research, Teaching (one page per course taught as instructor of record, with its syllabus) and C.V. pages.
 
 Static site: Vite and plain TypeScript. There is no UI framework, no chart library and no third-party request.
 
@@ -46,6 +46,7 @@ npm test
 |---|---|
 | `tools/gen-pages.mjs` | Writes every page: CSS is inlined, and the shared head, top bar, footer and About Me are added |
 | `tools/shell.mjs` | Shared chrome: logo, author menu, routes, footer text, author name and links |
+| `tools/syllabi.mjs` | The course syllabi (PDFs in `static/files/syllabi/`, redacted before publishing), linked from Teaching and the C.V. |
 | `tools/about.mjs` | The one About Me paragraph shown at the end of the Research, Teaching and C.V. pages |
 | `tools/labs.mjs` | The lab workspace: every tab's controls, chart frame, equation and notes |
 | `tools/pages/*.mjs` | Every other page. Each module exports `pages` (see `notes/site-architecture.md`) |
@@ -55,7 +56,7 @@ npm test
 | `src/ui/` | Canvas plot helper, equation animation, data table, export, figure viewer, scroll marker, menus |
 | `src/pages/` | Small entry scripts for the teaching, course and research pages |
 | `src/styles/` | `base`, `topbar` and `scroll` go on every page; the other files are per-page groups |
-| `static/` | Served as-is: the C.V. and paper PDFs, and the paper's figures (`tools/extract-figures.py` regenerates them) |
+| `static/` | Served as-is: the C.V., paper and syllabus PDFs, and the paper's figures (`tools/extract-figures.py` regenerates them) |
 | `notes/` | The contributor contract, the course-page contract, and the content sources (C.V. transcription, paper text) |
 | `tests/` | Reference-value tests for the maths, CSV parser and sort |
 
