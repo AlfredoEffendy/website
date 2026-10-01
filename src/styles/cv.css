@@ -4,7 +4,6 @@
 .cv-rows li { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: var(--s-4); }
 .cv-yr { color: var(--muted); font-variant-numeric: tabular-nums; }
 .cv-sub { color: var(--muted); font-size: 0.875rem; }
-.cv-plain { display: grid; gap: var(--s-3); }
 .cv-refs { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--s-4); }
 .cv-refs + .cv-sub { margin-top: var(--s-4); }
 @media (max-width: 40rem) {

@@ -50,21 +50,18 @@ describe('C.V. page', () => {
   const html = cvPages[0].body('../');
   const words = text(html);
 
-  it('is plain: title, the PDF, then the C.V.\'s own sections', () => {
+  it('is plain: title, the PDF, then only the sections no other page has', () => {
     expect(html).toContain('<h1>C.V.</h1>');
     expect(words).toContain('Download C.V. (PDF)');
     const headings = [...html.matchAll(/<h2[^>]*>([^<]+)<\/h2>/g)].map((m) => m[1]);
-    expect(headings).toEqual([
-      'Education',
-      'Working Papers',
-      'Selected Work in Progress',
-      'Instructor of Record',
-      'Teaching Assistant',
-      'Fellowships and Awards',
-      'Professional Service',
-      'Non-Academic Employment',
-      'References',
-    ]);
+    expect(headings).toEqual(['Education', 'Fellowships and Awards', 'Professional Service', 'Non-Academic Employment', 'References']);
+  });
+
+  it('points to Research and Teaching instead of repeating them', () => {
+    expect(words).toContain('Research and teaching: see the Research and Teaching pages.');
+    expect(html).toContain('<a href="../research/">Research</a>');
+    expect(html).toContain('<a href="../teaching/">Teaching</a>');
+    expect(words).not.toMatch(/When Yield Curves Invert Together|Maintaining Carry Structure|B BUS 221|STAT 311|Syllabus/);
   });
 
   it('links the paper only to its PDF and keeps contact details private', () => {

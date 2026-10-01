@@ -1,10 +1,20 @@
 // Research (research/index.html): working papers and work in progress, as on a typical faculty page:
 // the job market paper's title linking to its PDF, with the abstract; then the work in progress with its
-// C.V. descriptions. Text from the paper (notes/source/jmp.txt) and notes/source/cv.md.
+// C.V. descriptions. Text from the paper (notes/source/jmp.txt) and notes/source/cv.md. The C.V. page
+// does not repeat any of this; it points here.
 import { AUTHOR } from '../shell.mjs';
-import { IN_PROGRESS } from './cv.mjs';
 
 const PDF = 'files/when-yield-curves-invert-together.pdf';
+
+/** Work in progress: title and the C.V.'s description, verbatim. */
+const IN_PROGRESS = [
+  ['Maintaining Carry Structure in Machine Learning Carry Trade',
+    'Many machine learning carry trade papers focus on returns predictability and at times forgo the carry trade structure. ' +
+    'This paper is utilizing time series machine learning methods such as GRU, LSTM and their ensemble to predict carry trade crashes while maintaining the carry structure.'],
+  ['Cross-Asset Inversion Clocks',
+    'This paper analyzes the individual and clusters of yield curve inversions and their impact on different asset markets, such as the equity, commodity, and credit market. ' +
+    'It further asks whether the age of the inversions have different effects across multiple assets.'],
+];
 
 const PAPER = {
   title: 'When Yield Curves Invert Together: Currency Crash Risk',
