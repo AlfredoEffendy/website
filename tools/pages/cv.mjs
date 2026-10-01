@@ -26,6 +26,7 @@ const AWARDS = [
   ['2018', 'Order of Merit Awards'],
 ];
 const SERVICE = [
+  ['2026', 'Graduate Staff Assistant, Department of Economics'], // author-provided, 2026-10-01 (not yet in the PDF)
   ['2024–2026', 'Macroeconomics and International Trade Seminar and Brownbag Organizer'],
   ['2022–2024', '<b>President</b>, Graduate Student Committee, Department of Economics'],
   ['2023', 'Graduate Student Referee for Assistant Teaching Professor Search Committee'],

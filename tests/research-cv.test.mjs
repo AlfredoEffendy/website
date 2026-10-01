@@ -59,6 +59,13 @@ describe('C.V. page', () => {
     expect(headings).toEqual(['Education', 'Fellowships and Awards', 'Professional Service', 'Non-Academic Employment', 'References']);
   });
 
+  it('lists the 2026 Graduate Staff Assistant role first under Professional Service', () => {
+    const service = html.slice(html.indexOf('<h2>Professional Service</h2>'), html.indexOf('<h2>Non-Academic Employment</h2>'));
+    const items = [...service.matchAll(/<li><span class="cv-yr">([^<]*)<\/span><span>(.*?)<\/span><\/li>/g)].map((m) => [m[1], m[2]]);
+    expect(items[0]).toEqual(['2026', 'Graduate Staff Assistant, Department of Economics']);
+    expect(items).toHaveLength(4);
+  });
+
   it('points to Research and Teaching instead of repeating them', () => {
     expect(words).toContain('Research and teaching: see the Research and Teaching pages.');
     expect(html).toContain('<a href="../research/">Research</a>');

@@ -94,6 +94,7 @@ Fall 2019. ACMS 30010: Spring 2019. ACMS 20620: Spring 2019. ACMS 30530: Fall 20
 Asset Pricing, Risk Management, and Big Data Analysis. I am on the 2026–2027 academic job market."
 
 ## Professional Service
+- 2026 — Graduate Staff Assistant, Department of Economics (author-provided 2026-10-01; not in the September 2026 PDF yet)
 - 2024–2026 — Macroeconomics and International Trade Seminar and Brownbag Organizer
 - 2022–2024 — **President**, Graduate Student Committee, Department of Economics
 - 2023 — Graduate Student Referee for Assistant Teaching Professor Search Committee
