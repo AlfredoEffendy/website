@@ -1,5 +1,26 @@
 import { describe, expect, it } from 'vitest';
-import { ROUTES, THEME_BOOT, labHref, topbar } from '../tools/shell.mjs';
+import { ICON, ROUTES, SITE_URL, THEME_BOOT, head, labHref, topbar } from '../tools/shell.mjs';
+
+describe('link previews and the browser tab', () => {
+  const html = head({ title: 'C.V. · Alfredo Effendy', description: 'd', style: '', root: '../', path: 'cv/index.html' });
+
+  it('name the site after the author and point at the page\'s public address', () => {
+    expect(SITE_URL).toBe('https://alfredoeffendy.github.io/website/');
+    expect(html).toContain('<meta property="og:site_name" content="Alfredo Effendy">');
+    expect(html).toContain('<meta property="og:url" content="https://alfredoeffendy.github.io/website/cv/">');
+    expect(html).toContain('<link rel="canonical" href="https://alfredoeffendy.github.io/website/cv/">');
+  });
+
+  it('show the author\'s photo as the preview image', () => {
+    expect(html).toContain('<meta property="og:image" content="https://alfredoeffendy.github.io/website/img/alfredo-effendy-og.jpg">');
+  });
+
+  it('use the author\'s initials as the icon, not the Stats Engine bell', () => {
+    const svg = decodeURIComponent(ICON);
+    expect(svg).toContain('>AE<');
+    expect(svg).not.toContain('M4 24c5');
+  });
+});
 
 /** Runs the boot script with a given address, system setting and saved choice; returns data-theme. */
 function bootTheme({ search = '', systemDark = false, saved = null }) {

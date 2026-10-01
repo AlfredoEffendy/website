@@ -21,3 +21,7 @@ for px in (200, 400):
     out = OUT / f"alfredo-effendy-{px}.webp"
     square.resize((min(px, side),) * 2, Image.LANCZOS).save(out, "WEBP", quality=82, method=6)
     print(f"wrote {out.relative_to(ROOT)} ({out.stat().st_size} bytes)")
+# Link-preview image (og:image): JPEG, because not every app that shows previews reads WebP.
+og = OUT / "alfredo-effendy-og.jpg"
+square.resize((min(400, side),) * 2, Image.LANCZOS).save(og, "JPEG", quality=85, optimize=True, progressive=True)
+print(f"wrote {og.relative_to(ROOT)} ({og.stat().st_size} bytes)")

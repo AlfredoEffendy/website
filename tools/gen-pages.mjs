@@ -81,12 +81,13 @@ const notes = (lab) => `<section class="notes" id="notes-${lab.slug}" aria-label
 ${lab.fine ? `<p class="fine">${lab.fine}</p>` : ''}</section>`;
 
 const index = `${head({
-  title: 'Stats Engine',
+  title: 'Stats Engine · Alfredo Effendy',
   description:
     'Six statistics simulations in one fast tool: distributions, sampling distributions, confidence intervals and regression, each with a live equation and exact theory. Bring your own data too.',
   style: labCss,
   boot: BOOT,
   root: '../',
+  path: 'stats-engine/index.html',
 })}
 <noscript><style>#panel-${DEFAULT},#notes-${DEFAULT}{display:grid}</style></noscript>
 </head>
@@ -125,7 +126,7 @@ for (const file of modules) {
   const list = typeof mod.pages === 'function' ? await mod.pages() : mod.pages;
   for (const p of list) {
     const root = rootOf(p.path);
-    const html = `${head({ title: p.title, description: p.description, style: css(p.css ?? [], root), root, extra: p.extraHead ?? '' })}
+    const html = `${head({ title: p.title, description: p.description, style: css(p.css ?? [], root), root, extra: p.extraHead ?? '', path: p.path })}
 </head>
 <body${p.bodyClass ? ` class="${p.bodyClass}"` : ''}>
 <a class="skip" href="#main">Skip to content</a>
