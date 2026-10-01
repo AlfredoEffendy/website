@@ -15,8 +15,9 @@ describe('teaching overview', () => {
   it('is a plain page with the two lists, like the Google Site', () => {
     expect(html).toContain('<h1>Teaching</h1>');
     expect(words).toContain(
-      'Each course I teach as instructor of record has a page with an interactive illustration I built for it, the topics it covers and its syllabus. Stats Engine collects the statistics simulations I use in class.',
+      'Each course below has a page with an interactive illustration helpful for the course, the topics it covers and its syllabus. Stats Engine has more statistics simulations.',
     );
+    expect(words).not.toMatch(/I built|I use in class/);
     expect(html).toContain('<a href="../stats-engine/">Stats Engine</a>');
     expect(html.indexOf('<h2>Instructor of Record</h2>')).toBeGreaterThan(0);
     expect(html.indexOf('<h2>Teaching Assistant</h2>')).toBeGreaterThan(html.indexOf('<h2>Instructor of Record</h2>'));
@@ -48,6 +49,40 @@ describe('teaching overview', () => {
     ])
       expect(words).toContain(line);
     expect(html).toContain('<h3>University of Notre Dame, Department of Applied and Computational Mathematics and Statistics</h3>');
+  });
+});
+
+describe('every course page', () => {
+  const slugs = { 'bbus-221': ['winter-2026', 'spring-2026'], 'qmeth-201': ['summer-2025'], 'econ-301': ['winter-2025'], 'econ-200': ['summer-2024'] };
+
+  it('links only the author\'s own syllabi, served by this site, and no other instructor\'s materials', () => {
+    for (const [slug, terms] of Object.entries(slugs)) {
+      const html = page(`teaching/${slug}/index.html`).body('../../');
+      const external = [...html.matchAll(/href="(https?:[^"]+)"/g)].map((m) => m[1]);
+      expect(external.filter((u) => /syllab|cnedita|summer-2024$/i.test(u)), slug).toEqual([]);
+      for (const t of terms) expect(html, slug).toContain(`href="../../files/syllabi/${slug}-${t}.pdf"`);
+    }
+  });
+});
+
+describe('QMETH 201 course page', () => {
+  const html = page('teaching/qmeth-201/index.html').body('../../');
+
+  it('draws its topics from the author\'s own Summer 2025 syllabus, not a 2005 one', () => {
+    expect(html).not.toMatch(/htamura|Tamura|2005/);
+    expect(html).toContain('<a href="../../files/syllabi/qmeth-201-summer-2025.pdf">QMETH 201 syllabus, Summer 2025 (Alfredo Effendy)</a>');
+    expect(text(html)).toContain('Hypothesis tests for one population mean and for one population proportion.');
+  });
+});
+
+describe('B BUS 221 course page', () => {
+  const html = page('teaching/bbus-221/index.html').body('../../');
+
+  it('draws its topics from the author\'s own 2026 syllabi, not other instructors\' ECON 201 syllabi', () => {
+    expect(html).not.toMatch(/ECON 201 [ACD] syllabus|syllabi\/2025\/|Econ%20201|Syllabus_201D/);
+    expect(html).toContain('<a href="../../files/syllabi/bbus-221-winter-2026.pdf">B BUS 221 syllabus, Winter 2026 (Alfredo Effendy)</a>');
+    expect(html).toContain('<a href="../../files/syllabi/bbus-221-spring-2026.pdf">B BUS 221 syllabus, Spring 2026 (Alfredo Effendy)</a>');
+    expect(text(html)).toContain('Money and banking; monetary policy and the Federal Reserve System.');
   });
 });
 

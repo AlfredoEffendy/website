@@ -4,12 +4,9 @@
 
 const ID = 'bbus-221';
 const CATALOG = 'https://www.washington.edu/students/crscatb/bbus.html#bbus221';
-// UW Bothell School of Business economics pages (hosted on a faculty account), B BUS 221 entry.
-const BOTHELL = 'https://faculty.washington.edu/cnedita/index_files/bbus221.htm';
-// ECON 201 is the Seattle equivalent of B BUS 221 (stated in the catalogue entry above); Winter 2025 syllabi.
-const SYL_A = 'https://econ.washington.edu/sites/econ/files/documents/syllabi/2025/Econ%20201-UW%20Syllabus%20W25.pdf';
-const SYL_C = 'https://econ.washington.edu/sites/econ/files/documents/Econ%20201C%20Syllabus%20Winter%202025.pdf';
-const SYL_D = 'https://econ.washington.edu/sites/econ/files/documents/syllabi/2025/Syllabus_201D_Wi25.pdf';
+// The author's own syllabi for this course, served by this site: the source of the topics.
+const SYL_W26 = 'files/syllabi/bbus-221-winter-2026.pdf';
+const SYL_S26 = 'files/syllabi/bbus-221-spring-2026.pdf';
 
 // ---- markup helpers (every id carries the course prefix) -------------------------------------------
 const v = (sym) => `<i>${sym}</i>`;
@@ -83,36 +80,31 @@ export const course = {
   },
   summary:
     'Measure output, prices and jobs; explain long-run growth and short-run fluctuations; and use aggregate demand and supply to trace how shocks and fiscal or monetary policy move real GDP and the price level.',
+  // Topics as the author's 2026 syllabi list them (course description and roadmap; Krugman and Wells chapters).
   concepts: [
     {
+      title: 'Comparative advantage and trade',
+      body: 'Opportunity cost, comparative advantage and the production possibility frontier; supply and demand; price controls and quotas; international trade.',
+    },
+    {
       title: 'Measuring the economy',
-      body: 'Gross domestic product, the consumer price index, inflation and unemployment: how each is calculated and how to read it.',
-      source: SYL_D,
+      body: 'Measuring the price level and inflation; measuring economic activity with GDP and unemployment.',
     },
     {
-      title: 'Long-run growth',
-      body: 'What determines output in the long run: physical capital, human capital, infrastructure and institutions; and how saving and investment meet in financial markets.',
-      source: SYL_C,
+      title: 'Long-run growth and saving',
+      body: 'Long-run economic growth; saving, investment spending and the financial system.',
     },
     {
-      title: 'Spending and the multiplier',
-      body: 'The income–expenditure model (the Keynesian cross): extra spending becomes someone’s income, part of which is spent again, so output changes by a multiple of the first change.',
-      source: SYL_C,
-    },
-    {
-      title: 'Aggregate demand and supply',
-      body: 'Graphs of aggregate demand and aggregate supply, used to analyse how shocks and policy changes affect real GDP and the price level.',
-      source: SYL_A,
+      title: 'Short-run fluctuations',
+      body: 'Income and expenditure; aggregate demand and aggregate supply, and shocks to aggregate economic activity.',
     },
     {
       title: 'Fiscal and monetary policy',
-      body: 'Government spending and taxes, and the central bank: what each can do about unemployment and inflation, and the limits of each.',
-      source: BOTHELL,
+      body: 'Fiscal policy. Money and banking; monetary policy and the Federal Reserve System.',
     },
     {
-      title: 'Exchange rates and the balance of payments',
-      body: 'How exchange rates are determined and how a country’s trade and financial flows with the rest of the world are recorded.',
-      source: SYL_A,
+      title: 'Macroeconomic history',
+      body: 'Recent macroeconomic crises and history.',
     },
   ],
   interactive: {
@@ -125,9 +117,7 @@ export const course = {
   labs: [],
   sources: [
     { label: 'UW course catalogue (Bothell): B BUS 221', url: CATALOG },
-    { label: 'UW Bothell School of Business, economics courses: B BUS 221', url: BOTHELL },
-    { label: 'ECON 201 A syllabus, Winter 2025 (UW Economics; catalogue equivalent of B BUS 221)', url: SYL_A },
-    { label: 'ECON 201 C syllabus, Winter 2025 (UW Economics)', url: SYL_C },
-    { label: 'ECON 201 D syllabus, Winter 2025 (UW Economics)', url: SYL_D },
+    { label: 'B BUS 221 syllabus, Winter 2026 (Alfredo Effendy)', url: SYL_W26 },
+    { label: 'B BUS 221 syllabus, Spring 2026 (Alfredo Effendy)', url: SYL_S26 },
   ],
 };

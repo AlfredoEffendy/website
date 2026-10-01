@@ -7,11 +7,9 @@ const ID = 'econ-301';
 const CATALOG = 'https://www.washington.edu/students/crscat/econ.html#econ301';
 // UW Economics course page for section C, Winter 2025: names Alfredo Effendy as the instructor.
 const SECTION = 'https://econ.washington.edu/courses/2025/winter/econ/301/c';
-// Syllabus of that section (topics by week; textbook: Mankiw, Macroeconomics, 11th ed.).
-const SYL = 'https://econ.washington.edu/sites/econ/files/documents/Econ%20301C%20Syllabus%20Winter%202025.pdf';
-// Another section in the same quarter (learning objectives) and an earlier one that names the Solow model.
-const SYL_B = 'https://econ.washington.edu/sites/econ/files/documents/syllabi/2025/Econ%20301B%20Syllabus%20Winter%202025.pdf';
-const SYL_23 = 'https://econ.washington.edu/sites/econ/files/documents/syllabi/2023/spring/syllabus_econ301c_yuhan_lee.pdf';
+// The author's own syllabus for that section (topics by week; textbook: Mankiw, Macroeconomics, 11th ed.),
+// served by this site.
+const SYL = 'files/syllabi/econ-301-winter-2025.pdf';
 // The textbook's chapter titles (publisher's page).
 const TEXT = 'https://www.macmillanlearning.com/college/us/product/Macroeconomics/p/1319387993';
 
@@ -99,26 +97,24 @@ export const course = {
   },
   summary:
     'Build and use the core models of intermediate macroeconomics, from long-run classical theory and Solow growth to IS–LM, Mundell–Fleming and aggregate supply, to analyse output, employment, inflation and monetary and fiscal policy.',
+  // Topics from the author's Winter 2025 syllabus (schedule); the textbook's contents where noted.
   concepts: [
     {
       title: 'National income',
       body: 'The economy in the long run: where output comes from, how it is paid out to labour and capital, and where it goes as consumption, investment and government purchases.',
-      source: SYL,
     },
     {
       title: 'Money, inflation and unemployment',
       body: 'What the monetary system is and how it works; the causes, effects and social costs of inflation; and how the labour market shapes unemployment.',
-      source: SYL,
     },
     {
-      title: 'Long-run growth: the Solow model',
-      body: 'How the economy grows in the very long run through capital accumulation, population growth and technological progress: the steady state and what moves it.',
-      source: SYL_23,
+      title: 'Long-run growth',
+      body: 'Economic growth through capital accumulation, population growth and technological progress (Growth I and II in the syllabus).',
+      source: TEXT,
     },
     {
       title: 'Aggregate demand: IS–LM',
       body: 'The IS–LM model of the short run: the goods and money markets together set output and the interest rate, and fiscal and monetary policy shift them.',
-      source: SYL,
     },
     {
       title: 'The open economy: Mundell–Fleming',
@@ -126,9 +122,8 @@ export const course = {
       source: TEXT,
     },
     {
-      title: 'Aggregate supply and fluctuations',
-      body: 'Sticky prices against flexible prices: why output departs from its natural level in the short run, the short-run tradeoff between inflation and unemployment, and adjustment in the long run.',
-      source: SYL_B,
+      title: 'The business cycle and aggregate supply',
+      body: 'Economic fluctuations: the business cycle, and aggregate supply.',
     },
   ],
   interactive: {
@@ -142,9 +137,7 @@ export const course = {
   sources: [
     { label: 'UW course catalogue: ECON 301', url: CATALOG },
     { label: 'UW Economics: ECON 301 C, Winter 2025', url: SECTION },
-    { label: 'ECON 301 C syllabus, Winter 2025 (UW Economics)', url: SYL },
-    { label: 'ECON 301 B syllabus, Winter 2025 (UW Economics)', url: SYL_B },
-    { label: 'ECON 301 C syllabus, Spring 2023 (UW Economics)', url: SYL_23 },
+    { label: 'ECON 301 C syllabus, Winter 2025 (Alfredo Effendy)', url: SYL },
     { label: 'Mankiw, Macroeconomics, 11th edition (the course textbook): contents', url: TEXT },
   ],
 };

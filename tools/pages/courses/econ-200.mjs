@@ -7,10 +7,9 @@ const ID = 'econ-200';
 const CATALOG = 'https://www.washington.edu/students/crscat/econ.html#econ200';
 // UW Economics course page for section B, Summer 2024: names Alfredo Effendy as the instructor.
 const SECTION = 'https://econ.washington.edu/courses/2024/summer/econ/200/b';
-// His syllabus for that section (objectives; outline by chapter of Karlan and Morduch, Microeconomics, 3e).
-const SYL = 'https://econ.washington.edu/sites/econ/files/documents/ECON%20200%20Effendy%20Summer%202024%20Syllabus.pdf';
-// The department's list of Summer 2024 syllabi, which links the one above.
-const TERM = 'https://econ.washington.edu/summer-2024';
+// The author's own syllabus for that section (objectives; outline by chapter of Karlan and Morduch,
+// Microeconomics, 3e), served by this site: the source of the topics.
+const SYL = 'files/syllabi/econ-200-summer-2024.pdf';
 
 // ---- markup helpers (every id carries the course prefix) -------------------------------------------
 const v = (sym) => `<i>${sym}</i>`;
@@ -118,32 +117,26 @@ export const course = {
     {
       title: 'Opportunity cost and gains from trade',
       body: 'Scarcity forces choices, and the cost of a choice is the best alternative given up. Differences in opportunity cost create comparative advantage, so specialisation and exchange can leave both sides better off.',
-      source: SYL,
     },
     {
       title: 'Supply and demand',
       body: 'How buyers and sellers respond to prices, what shifts each curve, and how a competitive market settles where the quantity demanded equals the quantity supplied.',
-      source: SYL,
     },
     {
       title: 'Elasticity',
       body: 'How strongly the quantity demanded or supplied responds to a change in price, and why that response decides how far a market moves after a shock.',
-      source: SYL,
     },
     {
       title: 'Efficiency and government intervention',
       body: 'Consumer and producer surplus measure the gains from trade. Taxes, subsidies and price controls move prices and quantities away from equilibrium; the trades that no longer happen are a deadweight loss.',
-      source: SYL,
     },
     {
       title: 'International trade and externalities',
       body: 'Who gains and who loses when a market opens to trade, and why costs or benefits that fall on people outside a transaction lead markets to produce too much or too little.',
-      source: SYL,
     },
     {
       title: 'Firms and market structure',
       body: 'How firms decide what to produce, then how price and output differ under perfect competition, monopoly, monopolistic competition and oligopoly.',
-      source: SYL,
     },
   ],
   interactive: {
@@ -157,7 +150,6 @@ export const course = {
   sources: [
     { label: 'UW course catalogue: ECON 200', url: CATALOG },
     { label: 'UW Economics: ECON 200 B, Summer 2024', url: SECTION },
-    { label: 'ECON 200 B syllabus, Summer 2024 (UW Economics)', url: SYL },
-    { label: 'UW Economics: Summer 2024 course syllabi', url: TERM },
+    { label: 'ECON 200 B syllabus, Summer 2024 (Alfredo Effendy)', url: SYL },
   ],
 };

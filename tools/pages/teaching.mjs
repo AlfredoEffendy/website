@@ -147,12 +147,15 @@ function labs(c, root) {
 </section>`;
 }
 
-function sources(c) {
+/** A source's link: web addresses as they are; files on this site (e.g. a syllabus PDF) from the site root. */
+const sourceHref = (url, root) => (/^[a-z][a-z0-9+.-]*:/i.test(url) ? url : `${root}${url}`);
+
+function sources(c, root) {
   const rows = (c.sources ?? []).filter((s) => s?.url);
   if (!rows.length) return '';
   return `<section aria-labelledby="c-sources-h">
 <h2 id="c-sources-h">Sources</h2>
-<ol class="c-sources">${rows.map((s) => `<li><a href="${attr(s.url)}">${s.label ?? host(s.url)}</a></li>`).join('')}</ol>
+<ol class="c-sources">${rows.map((s) => `<li><a href="${attr(sourceHref(s.url, root))}">${s.label ?? host(s.url)}</a></li>`).join('')}</ol>
 </section>`;
 }
 
@@ -172,7 +175,7 @@ function coursePage(c) {
 ${interactive(c, root)}
 ${covers(c)}
 ${labs(c, root)}
-${sources(c)}`;
+${sources(c, root)}`;
   return {
     path,
     title: `${c.code}: ${plain(c.title)} · Teaching · Alfredo Effendy`,
@@ -197,7 +200,7 @@ function overview(solo) {
     css: ['page', 'teaching'],
     body: (root) => `<main id="main" class="page teach">
 <h1>Teaching</h1>
-<p>Each course I teach as instructor of record has a page with an interactive illustration I built for it, the topics it covers and its syllabus. <a href="${labHref(root)}">Stats Engine</a> collects the statistics simulations I use in class.</p>
+<p>Each course below has a page with an interactive illustration helpful for the course, the topics it covers and its syllabus. <a href="${labHref(root)}">Stats Engine</a> has more statistics simulations.</p>
 <h2>Instructor of Record</h2>
 ${byUnit(solo)
   .map(

@@ -6,9 +6,8 @@ const ID = 'qmeth-201';
 const CATALOG = 'https://www.washington.edu/students/crscat/qmeth.html#qmeth201';
 // UW Time Schedule, Summer 2025: QMETH 201 A lists "Effendy, Alfredo Nicholas" as instructor.
 const SCHEDULE = 'https://www.washington.edu/students/timeschd/SUM2025/qmeth.html#qmeth201';
-// QMETH 201 syllabus, Spring 2005 (Prof. H. Tamura), still served from UW faculty pages: the most
-// detailed public UW topic list found for this course.
-const SYLLABUS = 'https://faculty.washington.edu/htamura/qm201u/syllabus.doc';
+// The author's own syllabus for this course (Summer 2025), served by this site: the source of the topics.
+const SYLLABUS = 'files/syllabi/qmeth-201-summer-2025.pdf';
 
 // ---- markup helpers (every id carries the course prefix) -------------------------------------------
 const v = (sym) => `<i>${sym}</i>`;
@@ -86,35 +85,30 @@ export const course = {
   summary:
     'Classify, summarize and display data; reason with probability models; and use samples to estimate population values, test hypotheses and fit regression lines, with management problems as the examples.',
   concepts: [
+    // Topics as the author's Summer 2025 syllabus lists them (weekly overview, lectures 1–15).
     {
       title: 'Describing data',
-      body: 'Variable types (quantitative or qualitative, nominal or ordinal), then summaries and displays: histograms and relative frequencies; mean, median, mode and quartiles; variance and standard deviation.',
-      source: SYLLABUS,
+      body: 'Basic ideas and types of data; distributions in tables and graphs, and their shape; central tendency, standard deviation and variance.',
     },
     {
       title: 'Probability',
-      body: 'Sample spaces and events; rules for complements, unions and intersections; independence and conditional probability, worked through two-way tables and probability trees.',
-      source: SYLLABUS,
+      body: 'Probability relationships between events, and statistical independence.',
     },
     {
-      title: 'Random variables',
-      body: 'Probability distributions with their expected value and standard deviation; the binomial distribution and its normal approximation; the normal curve, z-scores and the standard normal table.',
-      source: SYLLABUS,
+      title: 'Probability distributions',
+      body: 'Discrete distributions (general discrete, binomial, Poisson and hypergeometric) and continuous ones (normal, uniform and exponential).',
     },
     {
       title: 'Sampling and confidence intervals',
-      body: 'Random and biased samples; the sampling distribution of a statistic, the central limit theorem and the standard error; confidence intervals built with z or t.',
-      source: SYLLABUS,
+      body: 'Sampling and sampling distributions; confidence intervals for a population proportion and for a population mean.',
     },
     {
       title: 'Hypothesis testing',
-      body: 'Null and alternative hypotheses, Type I and Type II errors, the level of significance; deciding by confidence interval, t-statistic or p-value; and a significant difference versus a real one.',
-      source: SYLLABUS,
+      body: 'Hypothesis tests for one population mean and for one population proportion.',
     },
     {
       title: 'Correlation and regression',
-      body: 'Scatterplots, the correlation coefficient and the least-squares line, with its standard error of estimate and R²; then the line as a population model and a test of whether its slope is zero.',
-      source: SYLLABUS,
+      body: 'Covariance and correlation, then simple linear regression.',
     },
   ],
   interactive: {
@@ -133,6 +127,6 @@ export const course = {
   sources: [
     { label: 'UW course catalogue: QMETH 201', url: CATALOG },
     { label: 'UW Time Schedule, Summer 2025: QMETH 201 A', url: SCHEDULE },
-    { label: 'QMETH 201 syllabus, Spring 2005 (H. Tamura, UW Business School), topic list', url: SYLLABUS },
+    { label: 'QMETH 201 syllabus, Summer 2025 (Alfredo Effendy)', url: SYLLABUS },
   ],
 };

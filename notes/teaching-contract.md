@@ -31,8 +31,9 @@ export const course = {
   whenSource: 'https://…',                           // URL supporting a quarter, or null
   catalog: { text: '…', url: '…' },                  // official catalogue description, verbatim or closely paraphrased, with its URL
   summary: '…',                                      // ≤ 40 words: what students leave able to do
-  concepts: [                                        // 4–7 core concepts the course covers, each sourced
-    { title: '…', body: '… (≤ 45 words)', source: 'https://…' },
+  concepts: [                                        // 4–7 core concepts the course covers, from the author's own syllabus
+    { title: '…', body: '… (≤ 45 words)', source: 'https://…' }, // `source` only when it is not the syllabus
+                                                     // (e.g. the textbook); never another instructor's syllabus
   ],
   interactive: {
     title: '…',                                      // e.g. 'Tax incidence on a market'
@@ -42,7 +43,8 @@ export const course = {
     css: ['course-econ-200'],                        // optional extra style groups
   },
   labs: [['confidence-intervals', 'Confidence intervals']], // optional links into Stats Engine labs (slug, label)
-  sources: [{ label: 'UW course catalogue: ECON', url: '…' }], // every URL used above
+  sources: [{ label: 'UW course catalogue: ECON', url: '…' }], // every URL used above; the author's syllabus as a
+                                                     // site path ('files/syllabi/<slug>-<term>.pdf')
 };
 ```
 
