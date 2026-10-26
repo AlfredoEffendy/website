@@ -1,7 +1,7 @@
 // C.V. (cv/index.html): a link to the PDF (it opens in the browser, as on the home page), then only the
 // parts of the C.V. no other page shows (education, awards, service, employment, references); research
 // and teaching have their own pages. Every fact comes from notes/source/cv.md (transcribed from the
-// September 2026 PDF). Kept off the page on purpose: the phone number and the referees' email addresses
+// October 2026 PDF). Kept off the page on purpose: the phone number and the referees' email addresses
 // (both are in the PDF).
 import { ROUTES } from '../shell.mjs';
 
@@ -16,8 +16,8 @@ const EDUCATION = [
   ['2027 (expected)', `Ph.D., Economics, ${UW}`, 'Fields: International Finance, Asset Pricing, Macro-Finance'],
   ['2023', `M.A., Economics, ${UW}`],
   ['2020', `M.S., Statistics, ${ND}`],
-  ['2018', `B.S., Mathematics, ${UCI}`, 'Honors in Mathematics, Concentration in Mathematical Finance'],
-  ['', `B.A., Quantitative Economics, ${UCI}`, 'Honors in Economics'],
+  ['2018', `B.S., Mathematics, ${UCI}`],
+  ['', `B.A., Quantitative Economics, ${UCI}`],
   ['', `B.S., Chemical Engineering, ${UCI}`],
 ];
 

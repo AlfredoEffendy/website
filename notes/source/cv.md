@@ -1,16 +1,17 @@
-# C.V. — Alfredo Effendy (transcribed from `static/files/alfredo-effendy-cv.pdf`, dated September 2026)
+# C.V. — Alfredo Effendy (transcribed from `static/files/alfredo-effendy-cv.pdf`, dated October 2026)
 
-Transcribed from the September 2026 PDF (its text can be extracted). This file is the authoritative source for any
+Transcribed from the October 2026 PDF (its text can be extracted). This file is the authoritative source for any
 page that states facts about the author. Do not add facts that are not here or in the job market
 paper; where a page needs more (e.g. course content), it must come from a cited public source.
 
 ## Header
 - Name: Alfredo Effendy
-- Date on C.V.: September 2026
+- Date on C.V.: October 2026
 - Department of Economics, University of Washington, 319C Savery Hall, Chelan Ln, Seattle, WA 98195
 - Email: aeffendy@uw.edu
 - Phone: listed on the PDF — **do not republish on web pages** (the PDF download carries it)
-- "Personal Website" link (https://sites.google.com/view/alfredoeffendy/home)
+- "Personal Website" link: https://alfredoeffendy.github.io/website/
+- The job market paper's title links to the paper on Google Drive.
 
 ## Education
 | Year | Degree |
@@ -18,39 +19,53 @@ paper; where a page needs more (e.g. course content), it must come from a cited 
 | 2027 (Expected) | Ph.D., Economics, University of Washington. Fields: International Finance, Asset Pricing, Macro-Finance |
 | 2023 | M.A., Economics, University of Washington |
 | 2020 | M.S., Statistics, University of Notre Dame |
-| 2018 | B.S., Mathematics, University of California - Irvine. Honors in Mathematics, Concentration in Mathematical Finance |
-| 2018 | B.A., Quantitative Economics, University of California - Irvine. Honors in Economics |
+| 2018 | B.S., Mathematics, University of California - Irvine |
+| 2018 | B.A., Quantitative Economics, University of California - Irvine |
 | 2018 | B.S., Chemical Engineering, University of California - Irvine |
 
-## Working Papers
-**When Yield Curves Invert Together: Currency Crash Risk** (Job Market Paper). The September 2026 C.V. gives the
-title only; it links the title to the paper on Google Drive.
+(The October 2026 C.V. no longer lists the honors notes that earlier versions had.)
 
-Earlier abstract (verbatim from the August 2026 C.V.; the author's own words, still used on the C.V. page): "A currency is exposed to risk specific to its own country and to risk that
-is global. A single country's yield curve inversion can reflect either kind, but when multiple
-countries' curves invert at the same time, the more likely cause is a global shock. I build a state
-variable from synchronized inversions across the G10 currencies' yield curves and show that it marks
-periods of elevated systemic currency crash risk. When the state is on, currencies depreciate in the
-order of their interest rates and of their sensitivity to global equity markets ("currency betas").
-The same interest rate differential that generates carry income therefore also sorts currencies by
-their crash exposure; high-rate currencies, which carry trades buy, depreciate more than the low-rate
-currencies used to fund the trade."
+## Working Papers
+**When Yield Curves Invert Together: Currency Crash Risk** (Job Market Paper). The paper itself (October 26, 2026;
+`static/files/when-yield-curves-invert-together.pdf`, text in `notes/source/jmp.txt`) carries the full abstract used on
+the Research page. The C.V. prints a shorter version of it (verbatim): "In a portfolio of currencies, such as the carry
+trade, currency-specific risk might be diversified, while systematic risk is affecting every risky currency. I show that a
+signal constructed from clustered yield curve inversions predicts crashes in high-interest and high-beta currencies, and
+the carry trade. This result plays a role in giving an early warning to avoid the well-known carry trade crashes. Further
+conditioning on the slope shape of global yield curves refines the signal to distinguish between inversions driven by
+slowing growth expectations versus inflation-fighting monetary policies. The latter comes with a higher interest rates
+environment, which provides a higher compensation for the carry trade crash risk."
 
 ## Selected Work in Progress
-Descriptions verbatim.
-- **Maintaining Carry Structure in Machine Learning Carry Trade.** "Many machine learning carry trade papers focus on
-  returns predictability and at times forgo the carry trade structure. This paper is utilizing time series machine
-  learning methods such as GRU, LSTM and their ensemble to predict carry trade crashes while maintaining the carry structure."
-- **Cross-Asset Inversion Clocks.** "This paper analyzes the individual and clusters of yield curve inversions and their
-  impact on different asset markets, such as the equity, commodity, and credit market. It further asks whether the age
-  of the inversions have different effects across multiple assets."
+In the C.V.'s order; descriptions verbatim.
+- **Cross-Asset Inversion Clocks.** "I study whether information signaled by yield curve inversions unfolds in a
+  systematic sequence across financial markets and the economy. Comparing isolated inversions with cross-country clusters
+  of inversions, I use the time since inversion to examine the order and timing of movements in equity, commodity, and
+  credit markets, alongside changes in economic activity and inflation."
+- **Maintaining Carry Structure in Machine Learning Carry Trade.** "Machine learning approaches to carry trades tend to
+  prioritize return prediction at the expense of the strategy’s defining structure: long high-interest-rate currencies and
+  short low-interest-rate currencies. This makes it unclear whether performance gains improve the carry trade or reflect a
+  different currency strategy. I address this issue by imposing the carry structure while using time series machine
+  learning models to capture carry trade crashes."
 
 ## Fellowships and Awards
 - 2021 — George and Pearl Corkery Scholarship
 - 2018 — Order of Merit Awards
 
 ## Teaching
-### Instructor (solo instructor of record; the C.V. heading is "Independent Instructor")
+The October 2026 C.V. lists course names by unit, without codes or years:
+- Instructor of Record — School of Business, UW Bothell: Introduction to Macroeconomics. Foster School of Business:
+  Introduction to Statistical Methods. Department of Economics: Intermediate Macroeconomics, Introduction to
+  Microeconomics.
+- Teaching Assistant — Foster School of Business: Master’s Level Probability and Statistics, Introduction to Statistical
+  Methods. Department of Statistics: Elements of Statistical Methods. Department of Economics: Introduction to
+  Macroeconomics, Global Health Economics. ACMS Department, University of Notre Dame: Projects in Actuarial Science,
+  Statistical Methods and Data Analysis, Applied Mathematical Financial Economics, Applied Linear Algebra, Introduction to
+  Probability, Statistics for Business.
+
+The codes, years and quarters the site shows come from the earlier C.V.s and the author (below):
+
+### Instructor of record (codes and years from the September 2026 C.V.)
 | Years | Course | Unit |
 |---|---|---|
 | 2026 | B BUS 221: Introduction Macroeconomics | School of Business, University of Washington - Bothell |
@@ -58,16 +73,10 @@ Descriptions verbatim.
 | 2025 | ECON 301: Intermediate Macroeconomics | Department of Economics, University of Washington |
 | 2024 | ECON 200: Introduction to Microeconomics | Department of Economics, University of Washington |
 
-Quarters confirmed by the author (2026-10-01): B BUS 221 was taught in **Winter and Spring 2026**. No public UW page
-is cited for these quarters.
+Quarters confirmed by the author (2026-10-01): B BUS 221 was taught in **Winter and Spring 2026**. The other quarters
+are on the public UW Time Schedule (QMETH 201 A Summer 2025, ECON 301 C Winter 2025, ECON 200 B Summer 2024).
 
-Corroborating public source: the UW Economics profile (https://econ.washington.edu/people/alfredo-effendy)
-lists "ECON 200 B: Introduction to Microeconomics" linked to https://econ.washington.edu/courses/2024/summer/econ/200/b
-(i.e. Summer 2024, section B) and "ECON 201 AC: Introduction to Macroeconomics" linked to
-https://econ.washington.edu/courses/2023/winter/econ/201/ac (Winter 2023; ECON 201 AC is a quiz section, consistent
-with the TA role below).
-
-### Teaching Assistant
+### Teaching assistant (codes and years from the September 2026 C.V.; "Master’s Level Probability and Statistics" = SCM 501 and BUS AN 510)
 | Years | Course | Unit |
 |---|---|---|
 | 2026– | SCM 501: Probability and Statistics | Foster School of Business, University of Washington |
@@ -94,7 +103,7 @@ Fall 2019. ACMS 30010: Spring 2019. ACMS 20620: Spring 2019. ACMS 30530: Fall 20
 Asset Pricing, Risk Management, and Big Data Analysis. I am on the 2026–2027 academic job market."
 
 ## Professional Service
-- 2026 — Graduate Staff Assistant, Department of Economics (author-provided 2026-10-01; not in the September 2026 PDF yet)
+- 2026 — Graduate Staff Assistant, Department of Economics (author-provided 2026-10-01; **not in the October 2026 PDF**)
 - 2024–2026 — Macroeconomics and International Trade Seminar and Brownbag Organizer
 - 2022–2024 — **President**, Graduate Student Committee, Department of Economics
 - 2023 — Graduate Student Referee for Assistant Teaching Professor Search Committee
@@ -107,3 +116,4 @@ Asset Pricing, Risk Management, and Big Data Analysis. I am on the 2026–2027 a
 - Lukas Kremens, Associate Professor of Finance, University of Washington
 - Eric Zivot, Robert R. Richards Professor of Economics, University of Washington
 - Issariya Sirichakwal (Teaching), Associate Teaching Professor of OM, University of Washington
+  (the October 2026 PDF shows the email as one address and links it to another; the author should check it)

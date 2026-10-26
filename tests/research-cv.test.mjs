@@ -34,11 +34,15 @@ describe('research page', () => {
     );
   });
 
-  it('lists the work in progress with its descriptions', () => {
+  it('lists the work in progress in the October 2026 C.V.\'s order and wording', () => {
     expect(html).toContain('<h2>Work in Progress</h2>');
-    expect(words).toContain('Maintaining Carry Structure in Machine Learning Carry Trade');
-    expect(words).toContain('This paper is utilizing time series machine learning methods');
-    expect(words).toContain('Cross-Asset Inversion Clocks');
+    const cross = words.indexOf('Cross-Asset Inversion Clocks');
+    const carry = words.indexOf('Maintaining Carry Structure in Machine Learning Carry Trade');
+    expect(cross).toBeGreaterThan(0);
+    expect(carry).toBeGreaterThan(cross);
+    expect(words).toContain('I study whether information signaled by yield curve inversions unfolds in a systematic sequence across financial markets and the economy.');
+    expect(words).toContain('I address this issue by imposing the carry structure while using time series machine learning models to capture carry trade crashes.');
+    expect(words).not.toContain('This paper is utilizing');
   });
 
   it('has no summary article, figures or interactive', () => {
@@ -57,6 +61,11 @@ describe('C.V. page', () => {
     expect(html).not.toContain(' download');
     const headings = [...html.matchAll(/<h2[^>]*>([^<]+)<\/h2>/g)].map((m) => m[1]);
     expect(headings).toEqual(['Education', 'Fellowships and Awards', 'Professional Service', 'Non-Academic Employment', 'References']);
+  });
+
+  it('lists education as the October 2026 C.V. does, without the honors notes', () => {
+    expect(words).toContain('B.S., Mathematics, University of California, Irvine');
+    expect(words).not.toMatch(/Honors in/);
   });
 
   it('lists the 2026 Graduate Staff Assistant role first under Professional Service', () => {

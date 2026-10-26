@@ -6,14 +6,15 @@ import { AUTHOR } from '../shell.mjs';
 
 const PDF = 'files/when-yield-curves-invert-together.pdf';
 
-/** Work in progress: title and the C.V.'s description, verbatim. */
+/** Work in progress: title and the C.V.'s description, verbatim, in the C.V.'s order (October 2026). */
 const IN_PROGRESS = [
-  ['Maintaining Carry Structure in Machine Learning Carry Trade',
-    'Many machine learning carry trade papers focus on returns predictability and at times forgo the carry trade structure. ' +
-    'This paper is utilizing time series machine learning methods such as GRU, LSTM and their ensemble to predict carry trade crashes while maintaining the carry structure.'],
   ['Cross-Asset Inversion Clocks',
-    'This paper analyzes the individual and clusters of yield curve inversions and their impact on different asset markets, such as the equity, commodity, and credit market. ' +
-    'It further asks whether the age of the inversions have different effects across multiple assets.'],
+    'I study whether information signaled by yield curve inversions unfolds in a systematic sequence across financial markets and the economy. ' +
+    'Comparing isolated inversions with cross-country clusters of inversions, I use the time since inversion to examine the order and timing of movements in equity, commodity, and credit markets, alongside changes in economic activity and inflation.'],
+  ['Maintaining Carry Structure in Machine Learning Carry Trade',
+    'Machine learning approaches to carry trades tend to prioritize return prediction at the expense of the strategy’s defining structure: long high-interest-rate currencies and short low-interest-rate currencies. ' +
+    'This makes it unclear whether performance gains improve the carry trade or reflect a different currency strategy. ' +
+    'I address this issue by imposing the carry structure while using time series machine learning models to capture carry trade crashes.'],
 ];
 
 const PAPER = {
