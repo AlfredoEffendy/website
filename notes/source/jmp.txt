@@ -2,7 +2,7 @@ When Yield Curves Invert Together:
 Currency Crash Risk∗
 Alfredo Effendy†
 University of Washington
-October 26, 2026
+October 27, 2026
 Click here for the latest version
 Abstract
 A yield-curve inversion is a well-documented leading indicator of domestic slowdown,
@@ -415,6 +415,59 @@ which Figure 3 illustrates on one of the episodes. Figure 2 provides an illustra
 activation and deactivation of the signal.
 If the IYC signal carries information about a common slowdown, that information should
 11
+(a) Norway: naive inversions and the active inversion
+10Y 2Y slope (%)
+3
+2
+1
+0
+1
+2
+active naive inversion (slope < 0)
+active inversion
+under the IYC rule
+inversion observed
+two steepening months deactivate the inversion
+naive inversion continues (slope still below zero)
+(b) Across the nine curves: naive count and active count
+# of inverted curves
+cumulative return (%)
+4
+2
+0
+15
+10
+5
+0
+5
+10
+15
+Jan
+1998
+naive inversion count (curves with slope < 0)
+IY
+C
+active count Nt
+cluster threshold
+(c) The carry trade and the two traded states, each held the month after it is observed
+carry total return
+spot component
+IYC state on
+naive state on
+naive on, IYC off:
+carry earns +6.2%
+IYC on:
+carry -6.4%
+Jul
+1998
+Jan
+1999
+Jul
+1999
+Jan
+2000
+Jul
+2000
 Figure 3: Sample of the IYC signal and naive count inversion comparison from 1998:01–2000:07.
 Panel (a) shows an example from Norwegian 10Y–2Y slope; both naive count (grey bar) and IYC
 (shaded) started the signal in August 1998 (▼), the slope steepened for two consecutive months

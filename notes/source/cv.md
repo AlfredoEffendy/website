@@ -26,7 +26,7 @@ paper; where a page needs more (e.g. course content), it must come from a cited 
 (The October 2026 C.V. no longer lists the honors notes that earlier versions had.)
 
 ## Working Papers
-**When Yield Curves Invert Together: Currency Crash Risk** (Job Market Paper). The paper itself (October 26, 2026;
+**When Yield Curves Invert Together: Currency Crash Risk** (Job Market Paper). The paper itself (October 27, 2026;
 `static/files/when-yield-curves-invert-together.pdf`, text in `notes/source/jmp.txt`) carries the full abstract used on
 the Research page. The C.V. prints a shorter version of it (verbatim): "In a portfolio of currencies, such as the carry
 trade, currency-specific risk might be diversified, while systematic risk is affecting every risky currency. I show that a
@@ -116,4 +116,3 @@ Asset Pricing, Risk Management, and Big Data Analysis. I am on the 2026–2027 a
 - Lukas Kremens, Associate Professor of Finance, University of Washington
 - Eric Zivot, Robert R. Richards Professor of Economics, University of Washington
 - Issariya Sirichakwal (Teaching), Associate Teaching Professor of OM, University of Washington
-  (the October 2026 PDF shows the email as one address and links it to another; the author should check it)
